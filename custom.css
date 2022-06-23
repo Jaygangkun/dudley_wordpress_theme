@@ -1,0 +1,607 @@
+/* font family */
+/* 'SF Pro Text' */
+/* 'Playfair Display' */
+/* 'Brandon Grotesque' */
+
+body {
+    background: #FFFCF3;
+}
+
+.container-lg {
+    width: 90%;
+    max-width: 1380px;
+    margin: auto;
+}
+
+.container-md {
+    width: 85%;
+    max-width: 1180px;
+    margin: auto;
+}
+
+h1 {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 53px;
+
+    color: #000000;
+} 
+
+.btn {
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-align: center;
+}
+
+.btn-black {
+    background: #000000;
+    color: #FFFCF3;
+}
+
+.btn-black:hover {
+
+}
+
+.btn-lg {
+    padding: 15px 30px;
+}
+
+.btn-sm {
+    padding: 5px 20px;
+}
+
+.fs-15 {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    
+    color: #000000;
+}
+
+.input-btn-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: #F8F8F8;
+}
+
+.input-btn-group input {
+    flex-grow: 1;
+    border: 0px;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #E5E5E5;
+    background: transparent;
+    outline: none !important;
+}
+
+.input-btn-group .btn {
+    margin-left: 10px;
+}
+
+.header-alert {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #5E4269;
+}
+
+.header-alert-text {
+    text-transform: uppercase;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    color: #ffffff;
+}
+
+
+
+.header-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo-link {
+    margin-right: 18px;
+}
+
+.header-logo_img {
+    width: 161px;
+    height: 101px;
+}
+
+.header-center-menus-wrap {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.header-menu-link {
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: uppercase;
+
+    color: #000000;
+    margin: 0px 10px;
+    text-decoration: none;
+}
+
+.header-account-link_img {
+    width: 25px;
+    height: 25px;
+}
+
+.header-cart-link_img {
+    width: 22px;
+    height: 25px;
+}
+
+.header-account-link {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.header-cart-link {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    margin-left: 18px;
+}
+
+.header-cart-link_count {
+    position: absolute;
+    right: -10px;
+    top: -3px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #5E4269;
+    font-family: 'SF Pro Text';
+    font-size: 18px;
+    line-height: 20px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.section-hero-slider {
+    margin-top: 20px;
+    margin-bottom: 140px;
+}
+
+.hero-slide-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-slide-wrap-left {
+    width: 50%;
+    max-width: 556px;
+}
+
+.hero-slide-wrap .btn {
+    margin-top: 74px
+}
+
+.hero-slide-text {
+}
+
+.text-highlight {
+    position: relative;
+    font-style: italic;
+    z-index: 1;
+}
+
+.text-highlight::before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 20px;
+    background: #C2B5C7;
+    z-index: -1;
+}
+
+.text-highlight-white::before {
+    background: #FFFCF3;
+}
+
+
+.hero-slide-img-wrap {
+    padding: 35px 28px;
+    position: relative;
+}
+
+.hero-slide-img-wrap::before {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 202px;
+    height: 100%;
+    background: #BFBDA4
+}
+
+.hero-slide-img {
+    width: 420px;
+    position: relative;
+}
+
+.hero-slider {
+    position: relative;
+    /* padding-left: 112px;
+    padding-right: 112px; */
+}
+
+.hero-slider-arrow-toleft {
+    position: absolute;
+    left: -76px;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    width: 36px;
+    height: 29px;
+    cursor: pointer;
+}
+
+.hero-slider-arrow-toright {
+    position: absolute;
+    right: -76px;
+    top: 50%;
+    transform: translate(100%, -50%);
+    width: 36px;
+    height: 29px;
+    cursor: pointer;
+}
+
+.section-newsletter {
+    padding: 100px 0px;
+    background: #BFBDA4;
+}
+
+.section-newsletter-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.newsletter-input-desc {
+    margin-top: 18px;
+}
+
+.newsletter-title {
+    margin-top: -20px;
+}
+
+.section-signature-products {
+    padding-top: 90px;
+    padding-bottom: 85px;
+}
+
+.section-signature-products-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.signature-products-cat-btn {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 53px;
+    text-transform: capitalize;
+
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+    margin: 0px 16px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.signature-products-cat-btn.active::before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 18px;
+    background: #C2B5C7;
+    z-index: -1;
+}
+
+.signature-products-btn:first-of-type {
+    margin-left: 0px;
+}
+
+.signature-products-btn:last-of-type {
+    margin-right: 0px;
+}
+
+.section-signature-products-list {
+    margin-top: 32px;
+}
+
+.product-list-col {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-list-col-wrap {
+    width: calc(25% - 22px);
+}
+
+.product-list-col-img-wrap {
+    width: 100%;
+    height: 0px;
+    padding-top: 120%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 18px;
+}
+
+.product-list-col-title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.product-list-col-price {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.product-list-col-desc {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    
+    color: #000000;
+    min-height: 84px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.product-list-col-btn {
+    width: 100%;
+}
+
+.section-feature-top {
+    position: relative;
+}
+
+.section-feature-img {
+    width: 100%;
+}
+
+.section-feature-title {
+    color: #FFFFFF;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.section-feature-list {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 42px;
+}
+
+.section-feature-col {
+    width: calc(25% - 20px);
+}
+
+.section-feature-col-title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
+    margin-bottom: 6px;
+}
+
+.section-feature-desc {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    
+    color: #000000;
+    
+}
+
+.section-testimonials {
+    padding: 100px 0px;
+}
+
+.section-testimonial-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-testimonial-wrap-left {
+
+}
+
+.section-testimonial-wrap-right {
+    width: 50%;
+    max-width: 538px;
+}
+
+.section-testimonial-img-wrap {
+    padding: 35px 28px;
+    position: relative;
+    z-index: 0;
+}
+
+.section-testimonial-img-wrap::before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 247px;
+    height: 100%;
+    background: #BFBDA4;
+    z-index: -1;
+}
+
+.section-testimonial-name {
+    margin-top: 10px;
+}
+
+.footer {
+    background: #EDE9DC;
+}
+
+.footer-top {
+    display: flex;
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.footer-menu-group-title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: uppercase;
+
+    color: #000000;
+}
+
+.footer-menu-link {
+    text-decoration: none;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: uppercase;
+
+    color: #000000;
+}
+
+.footer-menu-group ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.footer-menu-group ul li {
+    line-height: 21px;
+}
+
+.footer-newsletter-title {
+    font-family: 'Playfair Display';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+    /* identical to box height */
+
+    text-transform: capitalize;
+
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.footer-menu-group {
+    max-width: 220px;
+    margin-right: 100px;
+}
+
+.footer-space {
+    flex-grow: 1;
+}
+
+.footer-bottom {
+    padding-top: 45px;
+    padding-bottom: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-copyright {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
+}
+
+.section-instagrams {
+    padding-top: 50px;
+    padding-bottom: 116px;
+}
+
+.section-instagram-title {
+    text-align: center;
+}
+
+.section-instagram-img-list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.section-instagram-img {
+    width: calc(25% - 9px);
+}
+
+.trustpilot-img-wrap {
+    text-align: center;
+    margin-top: 137px;
+}
