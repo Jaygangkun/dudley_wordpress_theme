@@ -124,6 +124,7 @@ h1 {
 
 .header-logo-link {
     margin-right: 18px;
+    margin-left: -20px;
 }
 
 .header-logo_img {
@@ -604,4 +605,104 @@ h1 {
 .trustpilot-img-wrap {
     text-align: center;
     margin-top: 137px;
+}
+
+.section-shop-hero {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+
+.section-shop-hero-title {
+    color: #FFFFFF;
+    text-transform: capitalize;
+    max-width: 510px;
+}
+
+.section-products-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-products-filter-title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: capitalize;
+
+    color: #000000;
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.section-products-filter-btn {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: capitalize;
+
+    color: #000000;
+    cursor: pointer;
+    margin-right: 20px;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+}
+
+.section-products-filter-btn.active::after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 10px;
+    background: #C2B5C7;
+    z-index: -1;
+}
+
+.section-products-sort-title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: capitalize;
+
+    color: #000000;
+    display: inline-block;
+}
+
+.section-products-sort-select {
+    background: transparent;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: capitalize;
+
+    color: #000000;
+    border: 0px;
+    padding: 0px;
+}
+
+.section-products-top {
+    margin-top: 42px;
+}
+
+.section-products-list {
+    margin-top: 30px;
+}
+
+.section-products {
+    margin-bottom: 150px;
 }
