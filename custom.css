@@ -2,6 +2,7 @@
 /* 'SF Pro Text' */
 /* 'Playfair Display' */
 /* 'Brandon Grotesque' */
+/* 'Apercu Pro' */
 
 body {
     background: #FFFCF3;
@@ -69,6 +70,10 @@ h1 {
     color: #000000;
 }
 
+.f-italic {
+    font-style: italic;
+}
+
 .input-btn-group {
     position: relative;
     display: flex;
@@ -113,8 +118,6 @@ h1 {
     line-height: 21px;
     color: #ffffff;
 }
-
-
 
 .header-wrap {
     display: flex;
@@ -705,4 +708,179 @@ h1 {
 
 .section-products {
     margin-bottom: 150px;
+}
+
+.section-collection-products {
+    margin-bottom: 90px;
+}
+
+.section-product-detail {
+    margin-top: 50px;
+}
+
+.product-detail-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.product-details-right {
+    width: 45%;
+    padding-top: 20px;
+}
+
+.product-detail-title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 110%;
+    /* or 33px */
+
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.product-detail-price {
+    font-family: 'Apercu Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 19px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+    color: #000000;
+}
+
+.product-detail-btn-add-cart {
+    background: #1B170F !important;
+    border-radius: 5px;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+    color: #FFFFFF !important;
+    padding: 13px;
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+    border: 0px !important;
+}
+
+.product-detail-payment {
+    margin-top: 40px;
+}
+
+.product-detail-payment-row {
+    display: flex;
+    justify-content: space-between; 
+}
+
+.product-detail-payment-desc {
+    margin-left: 30px;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-transform: capitalize;
+}
+
+.product-detail-others {
+    margin-top: 60px;
+}
+
+.product-detail-accordion-head {
+    padding: 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.2px solid #A5A5A5;
+    cursor: pointer;
+}
+
+.product-detail-accordion-title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: uppercase;
+
+    color: #000000;
+}
+
+.product-detail-accordion-body {
+    display: none;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: capitalize;
+
+    color: #000000;
+    padding: 15px 0px;
+}
+
+.product-detail-accordion-icon {
+    cursor: pointer;
+}
+
+.product-detail-accordion-icon_img[plus] {
+    display: block;
+}
+
+.product-detail-accordion-icon_img[minus] {
+    display: none;
+}
+
+.open .product-detail-accordion-icon_img[plus] {
+    display: none;
+}
+
+.open .product-detail-accordion-icon_img[minus] {
+    display: block;
+}
+
+.product-detail-imgs {
+    display: flex;
+    margin-right: 136px;
+}
+
+.product-detail-product-img-list {
+    width: 92px;
+    margin-right: 20px;
+}
+
+.product-detail-product-img-list img {
+    width: 100%;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.product-detail-product-img-preview {
+    flex-grow: 1;
+    width: 525px;
+}
+
+.product-detail-product-img-preview img {
+    width: 100%;
+}
+
+.section-product-detail {
+    margin-bottom: 240px;
+}
+
+.section-collection-products h1{
+    margin-bottom: 20px;
 }
