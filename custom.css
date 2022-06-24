@@ -70,8 +70,21 @@ h1 {
     color: #000000;
 }
 
+.fs-50 {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 67px;
+    color: #000000;
+}
+
 .f-italic {
     font-style: italic;
+}
+
+.w-100 {
+    width: 100%;
 }
 
 .input-btn-group {
@@ -883,4 +896,96 @@ h1 {
 
 .section-collection-products h1{
     margin-bottom: 20px;
+}
+
+.story-hero-title {
+    text-align: center;
+    color: #000000;
+    max-width: 1096px;
+    margin: auto;
+}
+
+.section-story-hero {
+    padding-top: 87px;
+    padding-bottom: 154px;
+}
+
+.story-hero-title .text-highlight::before {
+    content: '';
+    left: 30px;
+}
+
+.section-story-text {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+
+    color: #000000;
+    margin-top: 105px;
+    margin-bottom: 105px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.section-story-content-imgs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-story-content-img-col {
+    width: calc(50% - 10px);
+}
+
+.section-story-tasks-title {
+    text-align: center;
+}
+
+.section-story-tasks-title .text-highlight::before {
+    left: 10px;
+    width: calc(100% - 20px);
+}
+
+.section-story-task-img {
+    width: 100%;
+    height: 0px;
+    padding-top: 120%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section-story-task-col {
+    width: calc(33.33% - 12px);
+}
+
+.section-story-tasks-list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 55px;
+    margin-bottom: 137px;
+}
+
+.section-story-task-title {
+    margin-bottom: 16px;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+
+.section-story-task-desc {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
 }
