@@ -20,6 +20,12 @@ body {
     margin: auto;
 }
 
+.container-sm {
+    width: 85%;
+    max-width: 650px;
+    margin: auto;
+}
+
 h1 {
     font-family: 'Playfair Display';
     font-style: normal;
@@ -988,4 +994,141 @@ h1 {
     line-height: 21px;
 
     color: #000000;
+}
+
+.section-magainzes-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+.section-magazine-col {
+    width: calc(33.33% - 24px);
+    margin: 0px 12px;
+    margin-bottom: 48px;
+}
+
+.section-magazine-col_img {
+    width: 100%;
+    height: 0px;
+    padding-top: 60%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 15px;
+}
+
+.section-magazine-col_title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+.section-magazine-col_desc {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    
+    color: #000000;
+    max-height: 63px;
+    margin-bottom: 15px;
+}
+
+.section-magazine-col_date {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+
+    color: #5E4269;
+}
+
+.section-magazines-top {
+    text-align: center;
+    margin-top: 62px;
+    margin-bottom: 156px;
+}
+
+.section-magazines-title {
+    margin-bottom: 21px;
+}
+
+.section-magazines-btn-wrap {
+    text-align: center;
+    margin-bottom: 86px;
+}
+
+.section-single-magazine-hero {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: cover;
+    width: 100%;
+    height: 300px;
+}
+
+.section-single-magazine-title {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 67px;
+
+    color: #000000;
+    margin-bottom: 18px;
+}
+
+.section-single-magazine-author {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: capitalize;
+
+    color: #000000;
+    margin-bottom: 25px;
+
+}
+
+.section-single-magazine-content,
+.section-single-magazine-content p {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
+}
+
+.section-single-magazine-content img {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.section-single-magazine-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.section-single-magazine-more-like__title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-single-magazine-more-like__title .text-highlight::before {
+    left: -10px;
+    width: calc(100% + 20px);
+}
+
+.section-single-magazine-more-like {
+    margin-bottom: 30px;
 }
