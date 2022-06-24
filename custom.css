@@ -643,13 +643,15 @@ h1 {
     max-width: 510px;
 }
 
-.section-products-top {
+.section-products-top,
+.section-directory-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.section-products-filter-title {
+.section-products-filter-title,
+.section-directory-sort-title {
     font-family: 'Brandon Grotesque';
     font-style: normal;
     font-weight: 400;
@@ -660,6 +662,10 @@ h1 {
     color: #000000;
     margin-right: 20px;
     display: inline-block;
+}
+
+.section-directory-sort-title {
+    margin-right: 0px;
 }
 
 .section-products-filter-btn {
@@ -691,7 +697,8 @@ h1 {
     z-index: -1;
 }
 
-.section-products-sort-title {
+.section-products-sort-title,
+.section-products-directory-title {
     font-family: 'Brandon Grotesque';
     font-style: normal;
     font-weight: 400;
@@ -703,7 +710,9 @@ h1 {
     display: inline-block;
 }
 
-.section-products-sort-select {
+.section-products-sort-select,
+.section-directory-sort-select,
+.section-directory-select {
     background: transparent;
     font-family: 'Brandon Grotesque';
     font-style: normal;
@@ -715,6 +724,10 @@ h1 {
     color: #000000;
     border: 0px;
     padding: 0px;
+}
+
+.section-directory-select {
+    margin-right: 26px;
 }
 
 .section-products-top {
@@ -1131,4 +1144,112 @@ h1 {
 
 .section-single-magazine-more-like {
     margin-bottom: 30px;
+}
+
+.section-directory-head {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+.section-directory-head h1 {
+    margin-bottom: 25px;
+}
+
+.section-directory-head-desc {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+    text-align: center;
+    text-transform: capitalize;
+
+    color: #000000;
+    margin-bottom: 83px;
+}
+
+.directory-filter-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.section-directory-filter-title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-align: center;
+    text-transform: capitalize;
+
+    color: #000000;
+    margin-bottom: 17px;
+}
+
+.directory-filter-btn {
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    text-transform: uppercase;
+
+    color: #000000;
+    margin: 10px;
+}
+
+.section-directory-list {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.directory-list-col {
+    width: calc(25% - 22px);
+    margin-bottom: 25px;
+}
+
+.directory-list-col-img-wrap {
+    width: 100%;
+    height: 0px;
+    padding-top: 120%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 18px;
+}
+
+.directory-list-col-title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
+}
+
+.directory-list-col-brand {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
+}
+
+.directory-list-col-price {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
 }
