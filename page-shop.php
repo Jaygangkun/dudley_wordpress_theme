@@ -38,18 +38,32 @@
 					<p class="product-list-col-price">£75.00</p>
 					<span class="btn btn-black btn-lg product-list-col-btn">Add To Basket</span>
 				</div>
+			</div>
+			<div class="product-list-col">
 				<div class="product-list-col-wrap">
 					<div class="product-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img3.png)"></div>
 					<h6 class="product-list-col-title">Luxury 'Oscar' Dog Blanket </h6>
 					<p class="product-list-col-price">£95.00</p>
 					<span class="btn btn-black btn-lg product-list-col-btn">Add To Basket</span>
 				</div>
+			</div>
+			<div class="product-list-col">
 				<div class="product-list-col-wrap">
 					<div class="product-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img2.png)"></div>
 					<h6 class="product-list-col-title">Raised Dog Bed</h6>
 					<p class="product-list-col-price">£290.00</p>
 					<span class="btn btn-black btn-lg product-list-col-btn">Add To Basket</span>
 				</div>
+			</div>
+			<div class="product-list-col">
+				<div class="product-list-col-wrap">
+					<div class="product-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img4.png)"></div>
+					<h6 class="product-list-col-title">Signature 'Rizzo' Dog </h6>
+					<p class="product-list-col-price">£95.00</p>
+					<span class="btn btn-black btn-lg product-list-col-btn">Add To Basket</span>
+				</div>
+			</div>
+			<div class="product-list-col">
 				<div class="product-list-col-wrap">
 					<div class="product-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img4.png)"></div>
 					<h6 class="product-list-col-title">Signature 'Rizzo' Dog </h6>

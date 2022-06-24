@@ -375,13 +375,15 @@ h1 {
     margin-top: 32px;
 }
 
-.product-list-col {
+.products-list {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.product-list-col-wrap {
+.product-list-col {
     width: calc(25% - 22px);
+    margin-bottom: 57px;
 }
 
 .product-list-col-img-wrap {
@@ -1252,4 +1254,114 @@ h1 {
     line-height: 21px;
 
     color: #000000;
+}
+
+.section-dogcast-hero_title {
+    margin-bottom: 17px;
+}
+
+.section-dogcast-hero_desc {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+    text-transform: capitalize;
+}
+
+.section-dogcast-hero-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-dogcast-hero-wrap-left {
+    width: 50%;
+    max-width: 435px;
+    padding-top: 100px;
+}
+
+.section-dogcast-hero-img-wrap {
+    padding: 35px 63px;
+    position: relative;
+}
+
+.section-dogcast-hero-img-wrap::before {
+    content: '';
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 202px;
+    height: 100%;
+    background: #BFBDA4
+}
+
+.section-dogcast-hero-img-wrap img {
+    width: 538x;
+    position: relative;
+}
+
+.section-dogcast-list-col-img-wrap {
+    position: relative;
+    width: 100%;
+    height: 0px;
+    padding-top: 100%;
+    margin-bottom: 30px;
+    background: grey;
+}
+
+.section-dogcast-list-col_vtitle {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 40px;
+    color: #FFFCF3;
+    position: absolute;
+    left: 17px;
+    top: 10px;
+}
+
+.section-dogcast-list-col_title {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+.section-dogcast-list-col_desc {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+.section-dogcast-list-col_date {
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 14px;
+
+    color: #5E4269;
+}
+
+.section-dogcast-list-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.section-dogcast-list-col {
+    width: calc(33.33% - 14px);
+}
+
+.section-dogcast-list {
+    margin-top: 125px;
+    margin-bottom: 128px;
 }
