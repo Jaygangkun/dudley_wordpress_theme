@@ -65,41 +65,58 @@
 		<div class="section-signature-products-top">
 			<h1 class="signature-products-title"><span class="text-highlight">Shop</span> Signature Products</h1>
 			<div class="">
-				<span class="signature-products-cat-btn active">Dogs</span>
-				<span class="signature-products-cat-btn">Humans</span>
+				<span class="signature-products-cat-btn active" data-cat="dogs">Dogs</span>
+				<span class="signature-products-cat-btn" data-cat="human">Humans</span>
 			</div>
-		</div>
-		<div class="section-signature-products-list products-list">
-			<div class="product-list-col">
-				<div class="product-list-col-wrap">
-					<div class="product-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img1.png)"></div>
-					<h6 class="product-list-col-title">Tilly' Dog Drying Coat </h6>
-					<p class="product-list-col-price">£75.00</p>
-					<p class="product-list-col-desc">Highly effecient drying coat made from organic bamboo. An advanced trademarked fabric inner lining absorbs moisture and wet-dog odours fast.</p>
-					<span class="btn btn-black btn-lg product-list-col-btn">Add To Basket</span>
+		</div>		
+		<div class="section-signature-products-list products-list" id="home_products_list">
+			<?php
+			$products = get_posts(array(
+				'post_type'             => 'product',
+				'orderby' => 'rand',
+				'numberposts' => 4,
+				'tax_query'             => array(
+					// 'relation' => 'OR',
+					array(
+						'taxonomy'      => 'product_cat',
+						'field'         => 'slug',
+						'terms'         => array('dog_clothing', 'dog_accessories'),
+						'operator'      => 'IN'
+					),
+					// array(
+					// 	'taxonomy'      => 'product_cat',
+					// 	'field'         => 'slug',
+					// 	'terms'         => 'mens_clothing', 
+					// 	// 'operator'      => 'IN'
+					// )
+				)
+			));
+			
+			foreach($products as $product) {
+				$product_obj = wc_get_product($product->ID);
+				$variations = $product_obj->get_available_variations();
+				// $variant_obj = wc_get_product($variations[0]['variation_id']);
+				$variant_obj = $variations[0];
+				?>
+				<div class="product-list-col">
+					<div class="product-list-col-wrap">
+						<div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
+						<a class="text-link" href="<?php echo get_permalink($product->ID)?>"><h6 class="product-list-col-title"><?php echo get_the_title($product->ID)?></h6></a>
+						<p class="product-list-col-price"><?php echo get_woocommerce_currency_symbol();?> <?php echo $variant_obj['display_price'];?></p>
+						<p class="product-list-col-desc">
+							<?php 
+							$excerpt = get_the_excerpt($product->ID);
+							$excerpt = substr($excerpt, 0, 260);
+							$result = substr($excerpt, 0, strrpos($excerpt, ' '));
+							echo $result;
+							?>
+						</p>
+						<span class="btn btn-black btn-lg product-list-col-btn btn-add-cart" data-product-id="<?php echo $product->ID?>" data-variant-id="<?php echo $variant_obj['variation_id']?>">Add To Basket</span>
+					</div>
 				</div>
-				<div class="product-list-col-wrap">
-					<div class="product-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img3.png)"></div>
-					<h6 class="product-list-col-title">Luxury 'Oscar' Dog Blanket </h6>
-					<p class="product-list-col-price">£95.00</p>
-					<p class="product-list-col-desc">Great for keeping dog hair off the furniture, while keeping your home looking stylish.</p>
-					<span class="btn btn-black btn-lg product-list-col-btn">Add To Basket</span>
-				</div>
-				<div class="product-list-col-wrap">
-					<div class="product-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img2.png)"></div>
-					<h6 class="product-list-col-title">Raised Dog Bed</h6>
-					<p class="product-list-col-price">£290.00</p>
-					<p class="product-list-col-desc">Bespoke raised wooden dog bed, hand crafted in Hackney, in East London.</p>
-					<span class="btn btn-black btn-lg product-list-col-btn">Add To Basket</span>
-				</div>
-				<div class="product-list-col-wrap">
-					<div class="product-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img4.png)"></div>
-					<h6 class="product-list-col-title">Signature 'Rizzo' Dog </h6>
-					<p class="product-list-col-price">£95.00</p>
-					<p class="product-list-col-desc">Our signature coat is the cornerstone of our collection. </p>
-					<span class="btn btn-black btn-lg product-list-col-btn">Add To Basket</span>
-				</div>
-			</div>
+				<?php
+			}
+			?>
 		</div>
 	</div>
 </section>
@@ -164,6 +181,43 @@
 			prevArrow: '<img class="hero-slider-arrow-toleft" src="<?php echo get_template_directory_uri()?>/assets/images/icon-arrow-toleft.png">',
 			nextArrow: '<img class="hero-slider-arrow-toright" src="<?php echo get_template_directory_uri()?>/assets/images/icon-arrow-toright.png">'
 		});
+	})
+
+	jQuery(document).on('click', '.signature-products-cat-btn', function() {
+		jQuery('.signature-products-cat-btn').removeClass('active');
+		jQuery(this).addClass('active');
+
+		jQuery.ajax({
+			url: ajax_url,
+			type: 'post',
+			data: {
+				action: 'load_home_products',
+				cat: jQuery(this).attr('data-cat')
+			},
+			dataType: 'json',
+			success: function(resp) {
+				jQuery('#home_products_list').html(resp.html);
+			}
+		})
+	})
+
+	jQuery(document).on('click', '.btn-add-cart', function() {
+		jQuery.ajax({
+			url: ajax_url,
+			type: 'post',
+			data: {
+				action: 'add_to_cart',
+				product_id: jQuery(this).attr('data-product-id'),
+				variant_id: jQuery(this).attr('data-variant-id'),
+				quantity: 1
+			},
+			dataType: 'json',
+			success: function(resp) {
+				// jQuery('#home_products_list').html(resp.html);
+				jQuery('#header_cart_count').text(resp.count);
+				alert('Added Successfully!');
+			}
+		})
 	})
 </script>
 <?php get_footer() ?>

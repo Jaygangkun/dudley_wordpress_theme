@@ -13,7 +13,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-	<header class="entry-header alignwide">
+	<header class="entry-header alignwide test">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 		<?php Dudley_post_thumbnail(); ?>
 	</header><!-- .entry-header -->

@@ -860,3 +860,118 @@ function Dudley_setting_page() {
 	<?php
     
 }
+
+function mytheme_add_woocommerce_support() {
+	add_theme_support( 'woocommerce' );
+}
+add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
+
+// ajax
+function load_more_magazines() {
+	$offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+	$magazines = get_posts(array(
+		'numberposts' => 3,
+		'offset' => $offset
+	));
+
+	ob_start();
+	foreach($magazines as $magazine) {
+		?>
+		<div class="section-magazine-col">
+			<div class="section-magazine-col-wrap">
+				<a class="section-magazine-col_img" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($magazine->ID), 'full' );?>)" href="<?php echo get_permalink($magazine->ID)?>"></a>
+				<a href="<?php echo get_permalink($magazine->ID)?>"><h6 class="section-magazine-col_title"><?php echo get_the_title($magazine->ID)?></h6></a>
+				<div class="section-magazine-col_desc">
+					<?php 
+					$excerpt = get_the_excerpt($magazine->ID);
+					$excerpt = substr($excerpt, 0, 260);
+					$result = substr($excerpt, 0, strrpos($excerpt, ' '));
+					echo $result;
+					?>
+				</div>
+				<p class="section-magazine-col_date"><?php echo get_the_date('F Y', $magazine->ID)?></p>
+			</div>
+		</div>
+		<?php
+	}
+	$html = ob_get_contents();
+	ob_end_clean();
+
+	echo json_encode(array(
+		'offset' => $offset + count($magazines),
+		'html' => $html
+	));
+
+	die();
+}
+
+add_action("wp_ajax_load_more_magazines", "load_more_magazines");
+add_action("wp_ajax_nopriv_load_more_magazines", "load_more_magazines");
+
+
+function load_home_products() {
+
+	$terms = array('dog_clothing', 'dog_accessories');
+
+	if(isset($_POST['cat']) && $_POST['cat'] == 'human') {
+		$terms = array('mens_clothing', 'womens_clothing');
+	}
+	$products = get_posts(array(
+		'post_type'             => 'product',
+		'orderby' => 'rand',
+		'numberposts' => 4,
+		'tax_query'             => array(
+			array(
+				'taxonomy'      => 'product_cat',
+				'field'         => 'slug',
+				'terms'         => $terms,
+				'operator'      => 'IN'
+			),
+		)
+	));
+	ob_start();
+	foreach($products as $product) {
+		$product_obj = wc_get_product($product->ID);
+		$variations = $product_obj->get_available_variations();
+		?>
+		<div class="product-list-col">
+			<div class="product-list-col-wrap">
+				<div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
+				<h6 class="product-list-col-title"><?php echo get_the_title($product->ID)?></h6>
+				<p class="product-list-col-price"><?php echo get_woocommerce_currency_symbol();?> <?php echo $variations[0]['display_price'];?></p>
+				<p class="product-list-col-desc">
+					<?php 
+					$excerpt = get_the_excerpt($product->ID);
+					$excerpt = substr($excerpt, 0, 260);
+					$result = substr($excerpt, 0, strrpos($excerpt, ' '));
+					echo $result;
+					?>
+				</p>
+				<span class="btn btn-black btn-lg product-list-col-btn btn-add-cart" data-product-id="<?php echo $product->ID?>" data-variant-id="<?php echo $variations[0]['variation_id']?>">Add To Basket</span>
+			</div>
+		</div>
+		<?php
+	}
+	$html = ob_get_contents();
+	ob_end_clean();
+
+	echo json_encode(array(
+		'html' => $html
+	));
+	die();
+}
+
+add_action("wp_ajax_load_home_products", "load_home_products");
+add_action("wp_ajax_nopriv_load_home_products", "load_home_products");
+
+function add_to_cart() {
+	WC()->cart->add_to_cart( $_POST['product_id'], $_POST['quantity'], $_POST['variation_id'] );
+	echo json_encode(array(
+		'success' => true,
+		'count' => WC()->cart->get_cart_contents_count()
+	));
+	die();
+}
+
+add_action("wp_ajax_add_to_cart", "add_to_cart");
+add_action("wp_ajax_nopriv_add_to_cart", "add_to_cart");

@@ -4,6 +4,20 @@
 /* 'Brandon Grotesque' */
 /* 'Apercu Pro' */
 
+@font-face {
+    font-family: "SF Pro Text";
+    src: url("assets/fonts/FontsFree-Net-SFProText-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Playfair Display";
+    src: url("assets/fonts/PlayfairDisplay-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "Brandon Grotesque";
+    src: url("assets/fonts/brandon-grotesque-regular.ttf");
+}
 body {
     background: #FFFCF3;
 }
@@ -35,6 +49,14 @@ h1 {
 
     color: #000000;
 } 
+
+.text-link {
+    text-decoration: none;
+}
+
+.text-link:hover {
+    text-decoration: none;
+}
 
 .btn {
     cursor: pointer;
@@ -405,6 +427,8 @@ h1 {
 
     color: #000000;
     margin-bottom: 12px;
+    height: 21px;
+    overflow: hidden;
 }
 
 .product-list-col-price {
@@ -426,7 +450,7 @@ h1 {
     line-height: 21px;
     
     color: #000000;
-    min-height: 84px;
+    height: 64px;
     overflow: hidden;
     margin-bottom: 12px;
 }
@@ -1032,6 +1056,7 @@ h1 {
     background-repeat: no-repeat;
     background-position: center;
     margin-bottom: 15px;
+    display: inline-block;
 }
 
 .section-magazine-col_title {
@@ -1042,6 +1067,7 @@ h1 {
     line-height: 29px;
     color: #000000;
     margin-bottom: 16px;
+    text-decoration: none;
 }
 
 .section-magazine-col_desc {
@@ -1054,6 +1080,7 @@ h1 {
     color: #000000;
     max-height: 63px;
     margin-bottom: 15px;
+    overflow: hidden;
 }
 
 .section-magazine-col_date {
@@ -1084,9 +1111,10 @@ h1 {
 .section-single-magazine-hero {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: cover;
+    background-position: center;
     width: 100%;
-    height: 300px;
+    height: 0px;
+    padding-top: 30%;
 }
 
 .section-single-magazine-title {
@@ -1122,6 +1150,15 @@ h1 {
     line-height: 21px;
 
     color: #000000;
+}
+
+.section-single-magazine-content h1,
+.section-single-magazine-content h2,
+.section-single-magazine-content h3,
+.section-single-magazine-content h4,
+.section-single-magazine-content h5,
+.section-single-magazine-content h6 {
+    font-family: 'Brandon Grotesque';
 }
 
 .section-single-magazine-content img {
@@ -1364,4 +1401,17 @@ h1 {
 .section-dogcast-list {
     margin-top: 125px;
     margin-bottom: 128px;
+}
+
+.section-img-hero {
+    width: 100%;
+    height: 0px;
+    padding-top: 43%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section-magazine-col-wrap a {
+    text-decoration: none;
 }

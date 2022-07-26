@@ -10,41 +10,57 @@
  */
 
 get_header();
-
-/* Start the Loop */
-while ( have_posts() ) :
-	the_post();
-
-	get_template_part( 'template-parts/content/content-single' );
-
-	if ( is_attachment() ) {
-		// Parent post navigation.
-		the_post_navigation(
-			array(
-				/* translators: %s: Parent post link. */
-				'prev_text' => sprintf( __( '<span class="meta-nav">Published in</span><span class="post-title">%s</span>', 'twentytwentyone' ), '%title' ),
-			)
-		);
-	}
-
-	// If comments are open or there is at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) {
-		comments_template();
-	}
-
-	// Previous/next post navigation.
-	$twentytwentyone_next = is_rtl() ? Dudley_get_icon_svg( 'ui', 'arrow_left' ) : Dudley_get_icon_svg( 'ui', 'arrow_right' );
-	$twentytwentyone_prev = is_rtl() ? Dudley_get_icon_svg( 'ui', 'arrow_right' ) : Dudley_get_icon_svg( 'ui', 'arrow_left' );
-
-	$twentytwentyone_next_label     = esc_html__( 'Next post', 'twentytwentyone' );
-	$twentytwentyone_previous_label = esc_html__( 'Previous post', 'twentytwentyone' );
-
-	the_post_navigation(
-		array(
-			'next_text' => '<p class="meta-nav">' . $twentytwentyone_next_label . $twentytwentyone_next . '</p><p class="post-title">%title</p>',
-			'prev_text' => '<p class="meta-nav">' . $twentytwentyone_prev . $twentytwentyone_previous_label . '</p><p class="post-title">%title</p>',
-		)
-	);
-endwhile; // End of the loop.
-
-get_footer();
+?>
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+	<section class="section-single-magazine-hero" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()), 'full' );?>)">
+	</section>
+	<section class="section-single-magazine-container">
+		<div class="container-sm">
+			<h1 class="fs-50 section-single-magazine-title"><?php the_title(); ?></h1>
+			<p class="section-single-magazine-author">Words by <?php echo get_the_author()?></p>
+			<div class="section-single-magazine-content">
+				<?php the_content(); ?>
+			</div>
+		</div>
+	</section>
+	<section class="section-single-magazine-more-like">
+		<div class="container-lg">
+			<h1 class="fs-50 section-single-magazine-more-like__title"><span class="text-highlight">More like this</span></h1>
+			<div class="section-magainzes-list">
+				<?php
+				$related_magazines = get_posts(array(
+					'numberposts' => 3,
+					'post__not_in' => array( get_the_ID() ),
+					'orderby' => 'rand',
+				));
+				foreach($related_magazines as $magazine) {
+					?>
+					<div class="section-magazine-col">
+						<div class="section-magazine-col-wrap">
+							<a class="section-magazine-col_img" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($magazine->ID), 'full' );?>)" href="<?php echo get_permalink($magazine->ID)?>"></a>
+							<a href="<?php echo get_permalink($magazine->ID)?>"><h6 class="section-magazine-col_title"><?php echo get_the_title($magazine->ID)?></h6></a>
+							<div class="section-magazine-col_desc">
+								<?php 
+								$excerpt = get_the_excerpt($magazine->ID);
+								$excerpt = substr($excerpt, 0, 260);
+								$result = substr($excerpt, 0, strrpos($excerpt, ' '));
+								echo $result;
+								?>
+							</div>
+							<p class="section-magazine-col_date"><?php echo get_the_date('F Y', $magazine->ID)?></p>
+						</div>
+					</div>
+					<?php
+				}
+				?>
+			</div>
+		</div>
+	</section>
+<?php endwhile; ?>
+<?php endif; ?>
+<script>
+	jQuery(document).ready(function() {
+		
+	})
+</script>
+<?php get_footer() ?>
