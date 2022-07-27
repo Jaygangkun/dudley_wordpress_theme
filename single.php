@@ -1,50 +1,31 @@
 <?php
 /**
- * The template for displaying all single posts
+ * The template for displaying all single posts.
  *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package WordPress
- * @subpackage Dudley
- * @since Dudley 1.0
+ * @package storefront
  */
 
-get_header();
+get_header(); ?>
 
-/* Start the Loop */
-while ( have_posts() ) :
-	the_post();
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-	get_template_part( 'template-parts/content/content-single' );
+		<?php
+		while ( have_posts() ) :
+			the_post();
 
-	if ( is_attachment() ) {
-		// Parent post navigation.
-		the_post_navigation(
-			array(
-				/* translators: %s: Parent post link. */
-				'prev_text' => sprintf( __( '<span class="meta-nav">Published in</span><span class="post-title">%s</span>', 'twentytwentyone' ), '%title' ),
-			)
-		);
-	}
+			do_action( 'storefront_single_post_before' );
 
-	// If comments are open or there is at least one comment, load up the comment template.
-	if ( comments_open() || get_comments_number() ) {
-		comments_template();
-	}
+			get_template_part( 'content', 'single' );
 
-	// Previous/next post navigation.
-	$twentytwentyone_next = is_rtl() ? Dudley_get_icon_svg( 'ui', 'arrow_left' ) : Dudley_get_icon_svg( 'ui', 'arrow_right' );
-	$twentytwentyone_prev = is_rtl() ? Dudley_get_icon_svg( 'ui', 'arrow_right' ) : Dudley_get_icon_svg( 'ui', 'arrow_left' );
+			do_action( 'storefront_single_post_after' );
 
-	$twentytwentyone_next_label     = esc_html__( 'Next post', 'twentytwentyone' );
-	$twentytwentyone_previous_label = esc_html__( 'Previous post', 'twentytwentyone' );
+		endwhile; // End of the loop.
+		?>
 
-	the_post_navigation(
-		array(
-			'next_text' => '<p class="meta-nav">' . $twentytwentyone_next_label . $twentytwentyone_next . '</p><p class="post-title">%title</p>',
-			'prev_text' => '<p class="meta-nav">' . $twentytwentyone_prev . $twentytwentyone_previous_label . '</p><p class="post-title">%title</p>',
-		)
-	);
-endwhile; // End of the loop.
+		</main><!-- #main -->
+	</div><!-- #primary -->
 
+<?php
+do_action( 'storefront_sidebar' );
 get_footer();

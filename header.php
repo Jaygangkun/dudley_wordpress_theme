@@ -1,19 +1,15 @@
 <?php
 /**
- * The header.
+ * The header for our theme.
  *
- * This is the template that displays all of the <head> section and everything up until main.
+ * Displays all of the <head> section and everything up till <div id="content">
  *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package WordPress
- * @subpackage Dudley
- * @since Dudley 1.0
+ * @package storefront
  */
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?> <?php twentytwentyone_the_html_classes(); ?>>
+<html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -54,4 +50,3 @@
 		</div>
 		
 	</div>
-
