@@ -59,6 +59,78 @@
 </div>
 
 <?php wp_footer(); ?>
-<link type="text/css" rel="stylesheet" href="<?php echo get_template_directory_uri()?>/custom.css">
+<script>
+	var price_symbol = '<?php echo get_woocommerce_currency_symbol();?>';
+	jQuery(document).on('change', '.product-list-col .product-detail-variant-select select', function() {
+		var product_list_col = jQuery(this).parents('.product-list-col');
+		var product_variations = jQuery(product_list_col).data('product-variants');
+		var product_initial_price = jQuery(product_list_col).data('product-initial-price');
+		var selected_variants = [];
+		var dom_variant_selects = jQuery(product_list_col).find('.product-detail-variant-select select');
+		for(var index = 0; index < dom_variant_selects.length; index ++) {
+			selected_variants.push({
+				attribute_name: jQuery(dom_variant_selects[index]).data('attribute_name'),
+				attribute_val: jQuery(dom_variant_selects[index]).val()
+			});
+		}
+
+		// finding product variant
+		var found_variant = null;
+		for(var index = 0; index < product_variations.length; index ++) {
+			var attributes = product_variations[index]['attributes'];
+			var bfound = true;
+			for(var vindex = 0; vindex < selected_variants.length; vindex ++) {
+				if(attributes[selected_variants[vindex].attribute_name] != selected_variants[vindex].attribute_val) {
+					bfound = false;
+					break;
+				}
+			}
+
+			if(bfound) {
+				found_variant = product_variations[index];
+				break;
+			}
+		}
+
+		if(found_variant) {
+			jQuery(product_list_col).find('.product-list-col-price').html(price_symbol + found_variant.display_price);
+			jQuery(product_list_col).find('[name="variant_id"]').val(found_variant.variation_id);
+		}
+		else {
+			jQuery(product_list_col).find('.product-list-col-price').html(product_initial_price);
+			jQuery(product_list_col).find('[name="variant_id"]').val('');
+		}
+	})
+
+	jQuery(document).on('click', '.product-list-col .btn-add-cart', function() {
+		var product_list_col = jQuery(this).parents('.product-list-col');
+
+		if(jQuery(product_list_col).find('[name="variant_id"]').val() == '') {
+			alert('Please Choose Product Variant');
+			return;
+		}
+
+		jQuery.ajax({
+			url: ajax_url,
+			type: 'post',
+			data: {
+				action: 'add_to_cart',
+				product_id: jQuery(product_list_col).find('[name="product_id"]').val(),
+				variation_id: jQuery(product_list_col).find('[name="variant_id"]').val(),
+				quantity: 1
+			},
+			dataType: 'json',
+			success: function(resp) {
+				// jQuery('#home_products_list').html(resp.html);
+				jQuery('#header_cart_count').text(resp.count);
+				alert('Added Successfully!');
+				// jQuery('.woocommerce-notices-wrapper').show();
+				// setTimeout(function(){
+				// 	jQuery('.woocommerce-notices-wrapper').slideUp();
+				// }, 3000);
+			}
+		})
+	})
+</script>
 </body>
 </html>

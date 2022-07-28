@@ -94,15 +94,50 @@
 			
 			foreach($products as $product) {
 				$product_obj = wc_get_product($product->ID);
-				$variations = $product_obj->get_available_variations();
-				// $variant_obj = wc_get_product($variations[0]['variation_id']);
-				$variant_obj = $variations[0];
+
+				$get_variations = count( $product_obj->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product_obj );
+				$available_variations = $get_variations ? $product_obj->get_available_variations() : false;
+				$attributes = $product_obj->get_variation_attributes();
+				$selected_attributes = $product_obj->get_default_attributes();
+
+
+				// single-product/add-to-cart/variable.php
+				$attribute_keys  = array_keys( $attributes );
+				$variations_json = wp_json_encode( $available_variations );
+				$variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_json ) : _wp_specialchars( $variations_json, ENT_QUOTES, 'UTF-8', true );
+				
 				?>
-				<div class="product-list-col">
+				<div class="product-list-col" data-product-variants="<?php echo $variations_attr;?>" data-product-initial-price="<?php echo function_exists( 'wc_esc_json' ) ? wc_esc_json( $product_obj->get_price_html() ) : _wp_specialchars( $product_obj->get_price_html(), ENT_QUOTES, 'UTF-8', true )?>">
 					<div class="product-list-col-wrap">
 						<div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
 						<a class="text-link" href="<?php echo get_permalink($product->ID)?>"><h6 class="product-list-col-title"><?php echo get_the_title($product->ID)?></h6></a>
-						<p class="product-list-col-price"><?php echo get_woocommerce_currency_symbol();?> <?php echo $variant_obj['display_price'];?></p>
+						<p class="product-list-col-price"><?php echo $product_obj->get_price_html();?></p>
+						<div class="product-list-detail-variants-row">
+							<?php
+							foreach ( $attributes as $attribute_name => $options ) {
+								?>
+								<div class="product-list-detail-variant-col">
+									<div class="product-detail-variant-wrap">
+										<div class="product-detail-variant-title"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></div>
+										<div class="product-detail-variant-select">
+											<?php
+											wc_dropdown_variation_attribute_options(
+												array(
+													'options'   => $options,
+													'attribute' => $attribute_name,
+													'product'   => $product_obj,
+												)
+											);
+											?>
+										</div>
+									</div>
+								</div>
+								<?php
+							}
+							?>
+						</div>
+						<input type='hidden' name="variant_id">
+						<input type='hidden' name="product_id" value="<?php echo $product->ID?>">
 						<p class="product-list-col-desc">
 							<?php 
 							$excerpt = get_the_excerpt($product->ID);
@@ -111,7 +146,7 @@
 							echo $result;
 							?>
 						</p>
-						<span class="btn btn-black btn-lg product-list-col-btn btn-add-cart" data-product-id="<?php echo $product->ID?>" data-variant-id="<?php echo $variant_obj['variation_id']?>">Add To Basket</span>
+						<span class="btn btn-black btn-lg product-list-col-btn btn-add-cart">Add To Basket</span>
 					</div>
 				</div>
 				<?php
@@ -197,25 +232,6 @@
 			dataType: 'json',
 			success: function(resp) {
 				jQuery('#home_products_list').html(resp.html);
-			}
-		})
-	})
-
-	jQuery(document).on('click', '.btn-add-cart', function() {
-		jQuery.ajax({
-			url: ajax_url,
-			type: 'post',
-			data: {
-				action: 'add_to_cart',
-				product_id: jQuery(this).attr('data-product-id'),
-				variant_id: jQuery(this).attr('data-variant-id'),
-				quantity: 1
-			},
-			dataType: 'json',
-			success: function(resp) {
-				// jQuery('#home_products_list').html(resp.html);
-				jQuery('#header_cart_count').text(resp.count);
-				alert('Added Successfully!');
 			}
 		})
 	})

@@ -399,13 +399,14 @@ h1 {
 
 .products-list {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
 }
 
 .product-list-col {
     width: calc(25% - 22px);
     margin-bottom: 57px;
+    margin: 0px 11px;
 }
 
 .product-list-col-img-wrap {
@@ -784,6 +785,7 @@ h1 {
 .product-details-right {
     width: 45%;
     padding-top: 20px;
+    /* flex-shrink: 0; */
 }
 
 .product-detail-title {
@@ -877,7 +879,7 @@ h1 {
     color: #000000;
 }
 
-.product-detail-accordion-body {
+.product-detail-accordion-body * {
     display: none;
     font-family: 'Brandon Grotesque';
     font-style: normal;
@@ -1414,4 +1416,15 @@ h1 {
 
 .section-magazine-col-wrap a {
     text-decoration: none;
+}
+
+.product-list-detail-variants-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.product-list-detail-variant-col {
+    width: calc(50% - 10px);
 }

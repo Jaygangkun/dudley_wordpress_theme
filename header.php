@@ -14,6 +14,7 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<?php wp_head(); ?>
+	<link type="text/css" rel="stylesheet" href="<?php echo get_template_directory_uri()?>/custom.css">
 	<script>
 		var ajax_url = '<?php echo admin_url('admin-ajax.php')?>';
 	</script>

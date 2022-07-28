@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-get_header( 'shop' ); ?>
+get_header(); ?>
 
 	<?php
 		/**
@@ -53,10 +53,31 @@ get_header( 'shop' ); ?>
 		 *
 		 * @hooked woocommerce_get_sidebar - 10
 		 */
-		do_action( 'woocommerce_sidebar' );
+		// do_action( 'woocommerce_sidebar' );
 	?>
+<script>
+	jQuery(document).ready(function() {
+		jQuery(document).on('click', '.product-detail-accordion-head', function() {
+			var accordion_container = jQuery(this).parents('.product-detail-accordion');
+			if(jQuery(accordion_container).hasClass('open')) {
+				jQuery(accordion_container).find('.product-detail-accordion-body').slideUp();
+				jQuery(accordion_container).removeClass('open');
+			}
+			else {
+				jQuery(accordion_container).find('.product-detail-accordion-body').slideDown();
+				jQuery(accordion_container).addClass('open');
+			}
+		})
 
+		jQuery(document).on('click', '.product-detail-product-img-list img', function() {
+			console.log('click');
+			jQuery('.product-detail-imgs .product-detail-product-img-preview img').attr('src', jQuery(this).attr('src'));
+		})
+	})
+
+	
+</script>
 <?php
-get_footer( 'shop' );
+get_footer();
 
 /* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */
