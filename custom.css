@@ -1243,16 +1243,21 @@ h1 {
     margin: 10px;
 }
 
+.directory-filter-btn.active {
+    color: #5E4269;
+}
+
 .section-directory-list {
     margin-top: 20px;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
 }
 
 .directory-list-col {
     width: calc(25% - 22px);
     margin-bottom: 25px;
+    margin: 0px 11px;
 }
 
 .directory-list-col-img-wrap {

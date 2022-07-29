@@ -242,4 +242,61 @@ function add_to_cart() {
 
 add_action("wp_ajax_add_to_cart", "add_to_cart");
 add_action("wp_ajax_nopriv_add_to_cart", "add_to_cart");
+
+function load_directories() {
+
+	$terms = array('directory');
+    $order = 'ASC';
+
+	if(isset($_POST['cat'])) {
+		$terms = $_POST['cat'];
+	}
+
+
+    if(isset($_POST['sort']) && $_POST['sort'] == 'desc') {
+		$order = 'DESC';
+	}
+
+	$products = get_posts(array(
+		'post_type'             => 'product',
+		// 'orderby' => 'rand',
+        'numberposts' => -1,
+        'posts_per_page' => -1,
+        'orderby'        => 'meta_value_num',
+        'order'          => $order,
+        'meta_key'       => '_price',
+		'tax_query'             => array(
+			array(
+				'taxonomy'      => 'product_cat',
+				'field'         => 'slug',
+				'terms'         => $terms,
+				'operator'      => 'IN'
+			),
+		)
+	));
+	ob_start();
+	foreach($products as $product) {
+        ?>
+        <div class="directory-list-col">
+            <div class="directory-list-col-wrap">
+                <div class="directory-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
+                <a class="text-link" href="<?php echo get_field('product_link', $product->ID)?>"><h6 class="directory-list-col-title"><?php echo get_the_title($product->ID)?></h6></a>
+                <p class="directory-list-col-brand"><?php echo get_field('brand', $product->ID)?></p>
+                <p class="directory-list-col-price"><?php echo get_field('price', $product->ID)?></p>
+            </div>
+        </div>
+        <?php
+    }
+	$html = ob_get_contents();
+	ob_end_clean();
+
+	echo json_encode(array(
+		'html' => $html
+	));
+	die();
+}
+
+add_action("wp_ajax_load_directories", "load_directories");
+add_action("wp_ajax_nopriv_load_directories", "load_directories");
+
 ?>

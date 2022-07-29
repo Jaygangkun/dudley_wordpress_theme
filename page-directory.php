@@ -17,15 +17,20 @@
 		<div class="section-directory-filter">
 			<p class="section-directory-filter-title">Filter By</p>
 			<div class="directory-filter-list">
-				<span class="directory-filter-btn">DINING</span>
-				<span class="directory-filter-btn">BEDROOM</span>
-				<span class="directory-filter-btn">BATHROOM</span>
-				<span class="directory-filter-btn">MEDICAL CABINET</span>
-				<span class="directory-filter-btn">iTCHY DOG </span>
-				<span class="directory-filter-btn">THE LIBARY</span>
-				<span class="directory-filter-btn">DE STRESS</span>
-				<span class="directory-filter-btn">pOSITIVE TRAINING</span>
-				<span class="directory-filter-btn">DOG DAYS OUT</span>
+				<?php
+				$directory_term = get_term_by('slug', 'directory', 'product_cat');
+				$terms = get_terms(array('product_cat'), array(
+					'parent' => $directory_term->term_id,
+				));
+
+				$initial_slugs = array();
+				foreach($terms as $term) {
+					?>
+					<span class="directory-filter-btn" data-slug="<?php echo $term->slug?>"><?php echo $term->name?></span>
+					<?Php
+					$initial_slugs[] = $term->slug;
+				}
+				?>
 			</div>
 		</div>
 	</div>
@@ -47,51 +52,45 @@
 			<div class="section-directory-sort">
 				<span class="section-directory-sort-title">Sort By:</span>
 				<select class="section-directory-sort-select">
-					<option>price low to high</option>
+					<option value="asc">price low to high</option>
+					<option value="desc">price high to low</option>
 				</select>
 			</div>
 		</div>
-		<div class="section-directory-list">
-			<div class="directory-list-col">
-				<div class="directory-list-col-wrap">
-					<div class="directory-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img1.png)"></div>
-					<h6 class="directory-list-col-title">The book your dog wishes you would read</h6>
-					<p class="directory-list-col-brand">BRAND NAME</p>
-					<p class="directory-list-col-price">£75.00</p>
+		<div class="section-directory-list" id="directory_list">
+			<?php
+			$products = get_posts(array(
+				'post_type'             => 'product',
+				// 'orderby' => 'rand',
+				'numberposts' => -1,
+				'posts_per_page' => -1,
+				'orderby'        => 'meta_value_num',
+				'order'          => 'ASC',
+				'meta_key'       => '_price',
+				'tax_query'             => array(
+					// 'relation' => 'OR',
+					array(
+						'taxonomy'      => 'product_cat',
+						'field'         => 'slug',
+						'terms'         => array('directory'),
+						'operator'      => 'IN'
+					),
+				)
+			));
+
+			foreach($products as $product) {
+				?>
+				<div class="directory-list-col">
+					<div class="directory-list-col-wrap">
+						<div class="directory-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
+						<a class="text-link" href="<?php echo get_field('product_link', $product->ID)?>"><h6 class="directory-list-col-title"><?php echo get_the_title($product->ID)?></h6></a>
+						<p class="directory-list-col-brand"><?php echo get_field('brand', $product->ID)?></p>
+						<p class="directory-list-col-price"><?php echo get_field('price', $product->ID)?></p>
+					</div>
 				</div>
-			</div>
-			<div class="directory-list-col">
-				<div class="directory-list-col-wrap">
-					<div class="directory-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img1.png)"></div>
-					<h6 class="directory-list-col-title">The book your dog wishes you would read</h6>
-					<p class="directory-list-col-brand">BRAND NAME</p>
-					<p class="directory-list-col-price">£75.00</p>
-				</div>
-			</div>
-			<div class="directory-list-col">
-				<div class="directory-list-col-wrap">
-					<div class="directory-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img1.png)"></div>
-					<h6 class="directory-list-col-title">The book your dog wishes you would read</h6>
-					<p class="directory-list-col-brand">BRAND NAME</p>
-					<p class="directory-list-col-price">£75.00</p>
-				</div>
-			</div>
-			<div class="directory-list-col">
-				<div class="directory-list-col-wrap">
-					<div class="directory-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img1.png)"></div>
-					<h6 class="directory-list-col-title">The book your dog wishes you would read</h6>
-					<p class="directory-list-col-brand">BRAND NAME</p>
-					<p class="directory-list-col-price">£75.00</p>
-				</div>
-			</div>
-			<div class="directory-list-col">
-				<div class="directory-list-col-wrap">
-					<div class="directory-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/product-img1.png)"></div>
-					<h6 class="directory-list-col-title">The book your dog wishes you would read</h6>
-					<p class="directory-list-col-brand">BRAND NAME</p>
-					<p class="directory-list-col-price">£75.00</p>
-				</div>
-			</div>
+				<?php
+			}
+			?>
 		</div>
 	</div>
 </section>
@@ -109,6 +108,37 @@
 <script>
 	jQuery(document).ready(function() {
 		
+	})
+
+	jQuery(document).on('click', '.directory-filter-btn', function() {
+		
+		if(jQuery(this).hasClass('active')) {
+			jQuery(this).removeClass('active');
+		}
+		else {
+			jQuery(this).addClass('active');
+		}
+		
+		var dom_active_filters = jQuery('.directory-filter-btn');
+		var cats = [];
+		for(var index = 0; index < dom_active_filters.length; index ++) {
+			if(jQuery(dom_active_filters[index]).hasClass('active')) {
+				cats.push(jQuery(dom_active_filters[index]).data('slug'));
+			}
+		}
+		jQuery.ajax({
+			url: ajax_url,
+			type: 'post',
+			data: {
+				action: 'load_directories',
+				cat: cats,
+				sort: jQuery('.section-directory-sort-select').val()
+			},
+			dataType: 'json',
+			success: function(resp) {
+				jQuery('#directory_list').html(resp.html);
+			}
+		})
 	})
 </script>
 <?php get_footer() ?>
