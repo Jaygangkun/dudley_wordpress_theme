@@ -15,7 +15,7 @@
 	</div>
 </section>
 <section class="section-story-content">
-	<img class="w-100" src="<?php echo get_template_directory_uri()?>/assets/images/ourstory-img1.png">
+	<img class="w-100 section-story-main-img" src="<?php echo get_template_directory_uri()?>/assets/images/ourstory-img1.png">
 	<div class="container-md">
 		<p class="section-story-text">Raised in a warm climate, Dudley & Co co-founder Amanda didn’t realise dogs needed cold-weather clothing until she moved to London and met Rizzo, a short-haired Vizsla. He was adorable and Amanda – unable to have a pup due to travel commitments - asked friends if she could dog-sit. Like all Vizslas, he was a sensitive soul who hated the cold, and slept in a tight ball during London’s long winters. One chilly day, Amanda walked into a pet store in Notting Hill and bought Rizzo his first coat. Did he love it? Did he ever! He even slept in it, his legs stretched out, languidly and happily. Amanda saw the importance of dog clothing and its role as more than just window-dressing for pooches, and started to look closely at what clothing and accessories were available for dogs. </p>
 		<div class="section-story-content-imgs">

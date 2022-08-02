@@ -64,7 +64,7 @@
 	<div class="container-lg">
 		<div class="section-signature-products-top">
 			<h1 class="signature-products-title"><span class="text-highlight">Shop</span> Signature Products</h1>
-			<div class="">
+			<div class="signature-products-cat-btns">
 				<span class="signature-products-cat-btn active" data-cat="dogs">Dogs</span>
 				<span class="signature-products-cat-btn" data-cat="human">Humans</span>
 			</div>

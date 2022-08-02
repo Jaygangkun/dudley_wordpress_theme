@@ -48,6 +48,7 @@ h1 {
     line-height: 53px;
 
     color: #000000;
+    margin-bottom: 0px;
 } 
 
 .text-link {
@@ -85,7 +86,7 @@ h1 {
 }
 
 .btn-sm {
-    padding: 5px 20px;
+    padding: 10px 20px;
 }
 
 .fs-15 {
@@ -135,6 +136,7 @@ h1 {
     color: #E5E5E5;
     background: transparent;
     outline: none !important;
+    box-shadow: initial;
 }
 
 .input-btn-group .btn {
@@ -269,7 +271,7 @@ h1 {
     position: absolute;
     left: 0px;
     bottom: 0px;
-    width: 100%;
+    width: calc(100% - 30px);
     height: 20px;
     background: #C2B5C7;
     z-index: -1;
@@ -341,6 +343,11 @@ h1 {
     margin-top: 18px;
 }
 
+.newsletter-input-desc a {
+    color: #000000;
+    text-decoration: underline;
+}
+
 .newsletter-title {
     margin-top: -20px;
 }
@@ -401,12 +408,15 @@ h1 {
     display: flex;
     /* justify-content: space-between; */
     flex-wrap: wrap;
+    margin-left: -11px;
+    margin-right: -11px;
 }
 
 .product-list-col {
     width: calc(25% - 22px);
     margin-bottom: 57px;
     margin: 0px 11px;
+    margin-bottom: 22px;
 }
 
 .product-list-col-img-wrap {
@@ -585,6 +595,7 @@ h1 {
 .footer-menu-group ul {
     list-style: none;
     padding-left: 0px;
+    margin-left: 0px;
 }
 
 .footer-menu-group ul li {
@@ -654,6 +665,10 @@ h1 {
 .trustpilot-img-wrap {
     text-align: center;
     margin-top: 137px;
+}
+
+.trustpilot-img {
+    margin: auto;
 }
 
 .section-shop-hero {
@@ -738,6 +753,7 @@ h1 {
 }
 
 .section-products-sort-select,
+.section-products-filter-select,
 .section-directory-sort-select,
 .section-directory-select {
     background: transparent;
@@ -1001,6 +1017,7 @@ h1 {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    margin-bottom: 15px;
 }
 
 .section-story-task-col {
@@ -1018,7 +1035,7 @@ h1 {
     margin-bottom: 16px;
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 20px;
     line-height: 29px;
     /* identical to box height */
@@ -1433,3 +1450,487 @@ h1 {
 .product-list-detail-variant-col {
     width: calc(50% - 10px);
 }
+
+.header-hamburger-link {
+    display: none;
+}
+
+.section-products-filter.mobile {
+    display: none;
+}
+
+@media screen and (max-width: 1470px) {
+    .hero-slider-arrow-toleft {
+        left: -30px;
+    }
+    .hero-slider-arrow-toright {
+        right: -30px
+    }
+}
+/* 1470px */
+
+@media screen and (max-width: 1063px) {
+    .section-newsletter-wrap {
+        display: block;
+    }
+
+    h1 {
+        font-size: 35px;
+        line-height: 48px;
+    }
+
+    .fs-50 {
+        font-size: 40px;
+        line-height: 60px;
+    }
+
+    .signature-products-cat-btn {
+        font-size: 30px;
+        line-height: 50px;
+    }
+
+    .newsletter-title {
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
+
+    .section-story-hero {
+        padding-bottom: 100px;
+    }
+}
+/* 1063px */
+
+@media screen and (max-width: 973px) {
+    .footer-top {
+        flex-wrap: wrap;
+    }
+
+    .footer-newsletter {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .newsletter-input-desc {
+        text-align: center;
+    }
+
+    .footer-newsletter-title {
+        /* text-align: center; */
+    }
+}
+/* 973px */
+
+@media screen and (max-width: 781px) {
+    .hero-slide-wrap {
+        flex-wrap: wrap;
+    }
+
+    .hero-slide-wrap-left {
+        order: 2;
+        width: 100%;
+        max-width: initial;
+        margin-top: 30px;
+    }
+
+    .hero-slide-wrap-right {
+        order: 1;
+        margin: auto;
+    }
+
+    .hero-slide-wrap .btn {
+        margin-top: 50px;
+        width: 100%;
+    }
+
+    .hero-slider-arrow-toleft {
+        left: 0px;
+    }
+
+    .hero-slider-arrow-toright {
+        right: 0px;
+    }
+
+    .product-list-col {
+        width: calc(50% - 22px);
+    }
+
+    .section-newsletter {
+        padding: 80px 0px;
+    }
+
+    .section-hero-slider {
+        margin-bottom: 80px;
+    }
+
+    .section-signature-products {
+        padding-top: 80px;
+        padding-bottom: 65px;
+    }
+
+    .section-feature-list {
+        flex-wrap: wrap;
+    }
+
+    .section-feature-col {
+        width: calc(50% - 20px);
+        margin-bottom: 30px;
+    }
+
+    .section-testimonial-wrap {
+        display: block;
+    }
+
+    .section-testimonial-wrap-right {
+        margin-top: 30px;
+        max-width: initial;
+        width: 100%;
+    }
+
+    .section-testimonial-wrap-left {
+        text-align: center;
+    }
+
+    .section-testimonial-img-wrap {
+        display: inline-block;
+    }
+
+    .section-instagram-img-list {
+        flex-wrap: wrap;
+    }
+
+    .section-instagram-img {
+        width: calc(50% - 9px);
+        margin-bottom: 18px;
+    }
+
+    .trustpilot-img-wrap {
+        margin-top: 80px;
+    }
+
+    .footer-newsletter .input-btn-group,
+    .section-newsletter .input-btn-group {
+        display: block;
+        background: transparent;
+        padding: 0px;
+    }
+
+    .footer-newsletter .input-btn-group input,
+    .section-newsletter .input-btn-group input {
+        width: 100%;
+        background: #F8F8F8;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        padding-top: 15px;
+    }
+
+    .footer-newsletter  .input-btn-group .btn,
+    .section-newsletter  .input-btn-group .btn {
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .section-testimonials {
+        padding: 80px 0px;
+        padding-bottom: 50px;
+    }
+
+    .header-center-menus-wrap {
+        display: none;
+        position: fixed;
+        left: 0px;
+        top: 182px;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background: #FFFCF3;
+    }
+
+    .header-menu-link {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .header-hamburger-link {
+        display: inline-block;
+        margin-left: 18px;
+    }
+
+    .header-cart-link_count {
+        font-size: 12px;
+    }
+
+    .section-shop-hero {
+        padding-top: 250px;
+    }
+
+    .section-products {
+        margin-bottom: 50px;
+    }
+
+    .section-products-filter.mobile,
+    .section-products-sort {
+        display: block;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #000000;
+    }
+
+    .section-products-filter.desktop {
+        display: none;
+    }
+
+    .section-story-text {
+        padding: 0px;
+    }
+
+    .section-story-tasks-list {
+        margin-bottom: 100px;
+    }
+
+    .section-magazines-top {
+        margin-bottom: 100px;
+    }
+
+    .section-single-magazine-hero {
+        padding-top: 50%;
+    }
+}
+/* 781px */
+
+@media screen and (max-width: 600px) {
+    .section-magazine-col {
+        width: 100%;
+    }
+
+    .section-single-magazine-content h2 {
+        margin-top: 50px;
+        font-size: 26px;
+    }
+}
+/* 600px */
+
+@media screen and (max-width: 568px) {
+    .hero-slide-img {
+        width: 280px;
+    }
+
+    h1 {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .fs-50 {
+        font-size: 30px;
+        line-height: 50px;
+    }
+
+    .signature-products-title {
+        text-align: center;
+    }
+
+    .signature-products-cat-btns {
+        display: flex;
+        margin-top: 20px;
+    }
+
+    .signature-products-cat-btn {
+        width: 50%;
+        margin: 0px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.2);
+        padding-bottom: 10px;
+    }
+
+    .signature-products-cat-btn::before {
+        height: 2px;
+        bottom: 0px;
+        background: rgba(0, 0, 0, 0.2);
+        content: '';
+        position: absolute;
+        left: 0px;
+        width: 100%;
+    }
+
+    .signature-products-cat-btn.active {
+        color: #000000;
+    }
+
+    .signature-products-cat-btn.active::before {
+        background: #000000;
+        height: 2px;
+        bottom: 0px;
+    }
+
+    .section-newsletter {
+        padding: 50px 0px;
+    }
+
+    .newsletter-input-desc {
+        margin-bottom: 0px;
+    }
+
+    .section-signature-products-top {
+        display: block;
+    }
+
+    .section-feature-col {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+        flex-wrap: wrap;
+    }
+
+    .footer-copyright {
+        order: 2;
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-bottom_img {
+        order: 1;
+        margin: auto;
+        margin-bottom: 50px;
+    }
+
+    .footer-bottom {
+        padding-top: 0px;
+    }
+
+    .footer-top {
+        padding-bottom: 50px;
+        padding-top: 80px;
+    }
+}
+/* 568px */
+
+@media screen and (max-width: 480px) {
+    .section-story-tasks-list {
+        flex-wrap: wrap;
+    }
+
+    .section-story-task-col {
+        width: 100%;
+    }
+
+    .section-story-text {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .section-story-hero {
+        padding-bottom: 50px;
+        padding-top: 50px;
+    }
+
+    .section-story-main-img {
+        height: 500px;
+        object-fit: cover;
+    }
+
+    .section-story-tasks-list {
+        margin-bottom: 50px;
+    }
+
+    .section-img-hero {
+        padding-top: 120%;
+    }
+
+    .section-magazines-top {
+        margin-bottom: 50px;
+    }
+
+    .section-magazines-btn-wrap {
+        margin-bottom: 50px;
+    }
+}
+/* 480px */
+
+@media screen and (max-width: 400px) {
+    .hero-slider-arrow-toleft {
+        display: none !important;
+    }
+
+    .hero-slider-arrow-toright {
+        display: none !important;
+    }
+
+    h1 {
+        font-size: 24px;
+        line-height: 35px;
+    }
+
+    .fs-50 {
+        font-size: 24px;
+        line-height: 35px;
+    }
+
+    .product-list-col {
+        width: 100%;
+    }
+
+    .section-feature-img {
+        height: 500px;
+    }
+
+    .section-feature-title {
+        font-size: 40px;
+        left: 20px;
+        top: 50px;
+        transform: initial;
+        line-height: 50px;
+    }
+
+    .section-testimonials {
+        padding: 50px 0px;
+        padding-bottom: 0px;
+    }
+
+    .trustpilot-img-wrap {
+        margin-top: 50px;
+    }
+
+    .section-instagrams {
+        padding-bottom: 80px;
+    }
+
+    .trustpilot-img {
+        width: 100px;
+    }
+
+    .signature-products-cat-btn {
+        font-size: 20px;
+        line-height: 35px;
+    }
+
+    .section-shop-hero {
+        padding-top: 200px;
+        padding-bottom: 50px;
+    }
+
+    .section-products {
+        padding-bottom: 0px;
+    }
+
+    .section-story-hero {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .header-logo_img {
+        width: 130px;
+        height: 90px;
+    }
+
+    .section-single-magazine-content h2 {
+        font-size: 20px;
+        margin-top: 30px;
+    }
+
+    .section-single-magazine-content img {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+}
+/* 400px */

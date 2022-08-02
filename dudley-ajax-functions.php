@@ -46,7 +46,7 @@ function load_home_products() {
 	$terms = array('dog_clothing', 'dog_accessories');
 
 	if(isset($_POST['cat']) && $_POST['cat'] == 'human') {
-		$terms = array('mens_clothing', 'womens_clothing');
+		$terms = array('doglovers_clothing');
 	}
 	$products = get_posts(array(
 		'post_type'             => 'product',
@@ -137,36 +137,74 @@ function load_shop_products() {
 
 	$terms = array('dog_clothing', 'dog_accessories');
     $order = 'ASC';
-
+    $products = null;
 	if(isset($_POST['cat']) && $_POST['cat'] == 'human') {
-		$terms = array('mens_clothing', 'womens_clothing');
+		$terms = array('doglovers_clothing');
 	}
 
     if(isset($_POST['cat']) && $_POST['cat'] == 'all') {
-		$terms = array('dog_clothing', 'dog_accessories', 'mens_clothing', 'womens_clothing');
+        $products = array_merge(
+            get_posts(array(
+                'post_type'             => 'product',
+                // 'orderby' => 'rand',
+                'numberposts' => -1,
+                'posts_per_page' => -1,
+                'orderby'        => 'meta_value_num',
+                'order'          => $order,
+                'meta_key'       => '_price',
+                'tax_query'             => array(
+                    array(
+                        'taxonomy'      => 'product_cat',
+                        'field'         => 'slug',
+                        'terms'         => array('dog_clothing', 'dog_accessories'),
+                        'operator'      => 'IN'
+                    ),
+                )
+            )),
+            get_posts(array(
+                'post_type'             => 'product',
+                // 'orderby' => 'rand',
+                'numberposts' => -1,
+                'posts_per_page' => -1,
+                'orderby'        => 'meta_value_num',
+                'order'          => $order,
+                'meta_key'       => '_price',
+                'tax_query'             => array(
+                    array(
+                        'taxonomy'      => 'product_cat',
+                        'field'         => 'slug',
+                        'terms'         => array('doglovers_clothing'),
+                        'operator'      => 'IN'
+                    ),
+                )
+            ))
+        );
 	}
 
     if(isset($_POST['sort']) && $_POST['sort'] == 'desc') {
 		$order = 'DESC';
 	}
 
-	$products = get_posts(array(
-		'post_type'             => 'product',
-		// 'orderby' => 'rand',
-        'numberposts' => -1,
-        'posts_per_page' => -1,
-        'orderby'        => 'meta_value_num',
-        'order'          => $order,
-        'meta_key'       => '_price',
-		'tax_query'             => array(
-			array(
-				'taxonomy'      => 'product_cat',
-				'field'         => 'slug',
-				'terms'         => $terms,
-				'operator'      => 'IN'
-			),
-		)
-	));
+    if($products == null) {
+        $products = get_posts(array(
+            'post_type'             => 'product',
+            // 'orderby' => 'rand',
+            'numberposts' => -1,
+            'posts_per_page' => -1,
+            'orderby'        => 'meta_value_num',
+            'order'          => $order,
+            'meta_key'       => '_price',
+            'tax_query'             => array(
+                array(
+                    'taxonomy'      => 'product_cat',
+                    'field'         => 'slug',
+                    'terms'         => $terms,
+                    'operator'      => 'IN'
+                ),
+            )
+        ));
+    }
+	
 	ob_start();
 	foreach($products as $product) {
 		$product_obj = wc_get_product($product->ID);

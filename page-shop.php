@@ -17,12 +17,21 @@
 <section class="section-products">
 	<div class="container-lg">
 		<div class="section-products-top">
-			<div class="section-products-filter">
+			<div class="section-products-filter desktop">
 				<span class="section-products-filter-title">Filter By:</span>
 				<span class="section-products-filter-btn" data-cat="dogs">dogs</span>
 				<span class="section-products-filter-btn" data-cat="human">apparel</span>
 				<span class="section-products-filter-btn active" data-cat="all">view all</span>
 			</div>
+			<div class="section-products-filter mobile">
+				<span class="section-products-filter-title">Filter By:</span>
+				<select class="section-products-filter-select">
+					<option value="dogs">dogs</option>
+					<option value="human">apparel</option>
+					<option value="all" selected>all</option>
+				</select>
+			</div>
+
 			<div class="section-products-sort">
 				<span class="section-products-sort-title">Sort By:</span>
 				<select class="section-products-sort-select">
@@ -33,30 +42,42 @@
 		</div>
 		<div class="section-products-list products-list" id="show_products_list">
 		<?php
-			$products = get_posts(array(
-				'post_type'             => 'product',
-				// 'orderby' => 'rand',
-				'numberposts' => -1,
-				'posts_per_page' => -1,
-				'orderby'        => 'meta_value_num',
-				'order'          => 'ASC',
-				'meta_key'       => '_price',
-				'tax_query'             => array(
-					// 'relation' => 'OR',
-					array(
-						'taxonomy'      => 'product_cat',
-						'field'         => 'slug',
-						'terms'         => array('dog_clothing', 'dog_accessories', 'mens_clothing', 'womens_clothing'),
-						'operator'      => 'IN'
-					),
-					// array(
-					// 	'taxonomy'      => 'product_cat',
-					// 	'field'         => 'slug',
-					// 	'terms'         => 'mens_clothing', 
-					// 	// 'operator'      => 'IN'
-					// )
-				)
-			));
+			$products = array_merge(
+				get_posts(array(
+					'post_type'             => 'product',
+					// 'orderby' => 'rand',
+					'numberposts' => -1,
+					'posts_per_page' => -1,
+					'orderby'        => 'meta_value_num',
+					'order'          => 'ASC',
+					'meta_key'       => '_price',
+					'tax_query'             => array(
+						array(
+							'taxonomy'      => 'product_cat',
+							'field'         => 'slug',
+							'terms'         => array('dog_clothing', 'dog_accessories'),
+							'operator'      => 'IN'
+						),
+					)
+				)),
+				get_posts(array(
+					'post_type'             => 'product',
+					// 'orderby' => 'rand',
+					'numberposts' => -1,
+					'posts_per_page' => -1,
+					'orderby'        => 'meta_value_num',
+					'order'          => 'ASC',
+					'meta_key'       => '_price',
+					'tax_query'             => array(
+						array(
+							'taxonomy'      => 'product_cat',
+							'field'         => 'slug',
+							'terms'         => array('doglovers_clothing'),
+							'operator'      => 'IN'
+						),
+					)
+				))
+			);
 			
 			foreach($products as $product) {
 				$product_obj = wc_get_product($product->ID);
@@ -133,12 +154,33 @@
 		jQuery('.section-products-filter-btn').removeClass('active');
 		jQuery(this).addClass('active');
 
+		jQuery('.section-products-filter-selec').val(jQuery(this).attr('data-cat'));
 		jQuery.ajax({
 			url: ajax_url,
 			type: 'post',
 			data: {
 				action: 'load_shop_products',
 				cat: jQuery(this).attr('data-cat'),
+				sort: jQuery('.section-products-sort-select').val()
+			},
+			dataType: 'json',
+			success: function(resp) {
+				jQuery('#show_products_list').html(resp.html);
+			}
+		})
+	})
+
+	jQuery(document).on('change', '.section-products-filter-select', function() {
+		
+		jQuery('.section-products-filter-btn').removeClass("active");
+		jQuery('.section-products-filter-btn[data-cat="' + jQuery(this).val() + '"]').addClass("active");
+
+		jQuery.ajax({
+			url: ajax_url,
+			type: 'post',
+			data: {
+				action: 'load_shop_products',
+				cat: jQuery('.section-products-filter-btn.active').attr('data-cat'),
 				sort: jQuery('.section-products-sort-select').val()
 			},
 			dataType: 'json',
