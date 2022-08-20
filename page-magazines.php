@@ -16,6 +16,24 @@
 		<div class="section-magazines-top">
 			<h1 class="fs-50 section-magazines-title"><span class="text-highlight">DUDLEY</span> is a magazine for dog lovers.</h1>
 			<p class="section-magazines-desc">Created with dog owners in mind, it's the place to go for everything dog-related. You'll not only find helpful hints and tips including dog training & health advice, but also a wide range of lifestyle content. Everything from insightful pieces on the important work of dog rescues & charities to reviews of dog-centric books & films; enjoy our "Bark Once for Service" pet friendly city guide and even celebrity interviews with their pets.</p>
+			<div class="section-magazine-filter">
+				<p class="section-magazine-filter-title">Filter By</p>
+				<div class="magazine-filter-list">
+					<?php
+					$post_category_terms = get_terms(array(
+						'taxonomy' => 'category'
+					));
+
+					$initial_slugs = array();
+					foreach($post_category_terms as $term) {
+						?>
+						<span class="magazine-filter-btn" data-slug="<?php echo $term->slug?>"><?php echo $term->name?></span>
+						<?Php
+						$initial_slugs[] = $term->slug;
+					}
+					?>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="container-lg">
@@ -39,7 +57,6 @@
 							echo $result;
 							?>
 						</div>
-						<p class="section-magazine-col_date"><?php echo get_the_date('F Y', $magazine->ID)?></p>
 					</div>
 				</div>
 				<?php
@@ -53,20 +70,71 @@
 </section>
 <script>
 	jQuery(document).on('click', '#btn_load_more_magazines', function() {
+		var dom_active_filters = jQuery('.magazine-filter-btn');
+		var cats = [];
+		for(var index = 0; index < dom_active_filters.length; index ++) {
+			if(jQuery(dom_active_filters[index]).hasClass('active')) {
+				cats.push(jQuery(dom_active_filters[index]).data('slug'));
+			}
+		}
+
 		jQuery.ajax({
 			url: ajax_url,
 			type: 'post',
 			data: {
 				action: 'load_more_magazines',
+				cat: cats,
+				count: 3,
 				offset: jQuery(this).attr('data-offset')
 			},
 			dataType: 'json',
 			success: function(resp) {
 				jQuery('#magazines_list').append(resp.html);
 				jQuery('#btn_load_more_magazines').attr('data-offset', resp.offset);
-				;
-				if(resp.offset == parseInt(jQuery('#btn_load_more_magazines').attr('data-total'))) {
+				if(resp.offset == resp.total) {
 					jQuery('#btn_load_more_magazines').hide();
+				}
+				else {
+					jQuery('#btn_load_more_magazines').show();
+				}
+			}
+		})
+	})
+
+	jQuery(document).on('click', '.magazine-filter-btn', function() {
+		
+		if(jQuery(this).hasClass('active')) {
+			jQuery(this).removeClass('active');
+		}
+		else {
+			jQuery(this).addClass('active');
+		}
+		
+		var dom_active_filters = jQuery('.magazine-filter-btn');
+		var cats = [];
+		for(var index = 0; index < dom_active_filters.length; index ++) {
+			if(jQuery(dom_active_filters[index]).hasClass('active')) {
+				cats.push(jQuery(dom_active_filters[index]).data('slug'));
+			}
+		}
+		jQuery.ajax({
+			url: ajax_url,
+			type: 'post',
+			data: {
+				action: 'load_more_magazines',
+				cat: cats,
+				count: 9,
+				offset: 0
+			},
+			dataType: 'json',
+			success: function(resp) {
+				jQuery('#magazines_list').html(resp.html);
+				jQuery('#btn_load_more_magazines').attr('data-offset', resp.offset);
+				if(resp.offset == resp.total) {
+					jQuery('#btn_load_more_magazines').hide();
+				}
+				else {
+					jQuery('#btn_load_more_magazines').show();	
 				}
 			}
 		})

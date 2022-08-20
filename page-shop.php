@@ -134,17 +134,7 @@
 		</div>
 	</div>
 </section>
-<section class="section-instagrams">
-	<div class="container-lg">
-		<h1 class="section-instagram-title">Follow us <span class="text-highlight">@wearedudleyandco</span></h1>
-		<div class="section-instagram-img-list">
-			<img class="section-instagram-img" src="<?php echo get_template_directory_uri()?>/assets/images/instagram-img1.png">
-			<img class="section-instagram-img" src="<?php echo get_template_directory_uri()?>/assets/images/instagram-img2.png">
-			<img class="section-instagram-img" src="<?php echo get_template_directory_uri()?>/assets/images/instagram-img3.png">
-			<img class="section-instagram-img" src="<?php echo get_template_directory_uri()?>/assets/images/instagram-img4.png">
-		</div>
-	</div>
-</section>
+<?php get_template_part('content', 'instagram');?>
 <script>
 	jQuery(document).ready(function() {
 		

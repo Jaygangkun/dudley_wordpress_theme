@@ -1,10 +1,54 @@
 <?php
 function load_more_magazines() {
-	$offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
-	$magazines = get_posts(array(
-		'numberposts' => 3,
-		'offset' => $offset
-	));
+    $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+    $count = isset($_POST['count']) ? intval($_POST['count']) : 3;
+
+    if(isset($_POST['cat'])) {
+        $magazines = get_posts(array(
+            'post_type'             => 'post',
+            'numberposts' => -1,
+            'offset' => $offset,
+            // 'posts_per_page' => -1,
+            'tax_query'             => array(
+                array(
+                    'taxonomy'      => 'category',
+                    'field'         => 'slug',
+                    'terms'         => $_POST['cat'],
+                    'operator'      => 'IN'
+                )
+            )
+        ));
+        $total = count($magazines);
+
+		$magazines = get_posts(array(
+            'post_type'             => 'post',
+            'numberposts' => $count,
+            'offset' => $offset,
+            // 'posts_per_page' => -1,
+            'tax_query'             => array(
+                array(
+                    'taxonomy'      => 'category',
+                    'field'         => 'slug',
+                    'terms'         => $_POST['cat'],
+                    'operator'      => 'IN'
+                )
+            )
+        ));
+	}
+    else {
+        $magazines = get_posts(array(
+            'post_type'             => 'post',
+            'numberposts' => -1,
+            'offset' => $offset,
+        ));
+        $total = count($magazines);
+
+        $magazines = get_posts(array(
+            'post_type'             => 'post',
+            'numberposts' => $count,
+            'offset' => $offset,
+        ));
+    }
 
 	ob_start();
 	foreach($magazines as $magazine) {
@@ -21,7 +65,6 @@ function load_more_magazines() {
 					echo $result;
 					?>
 				</div>
-				<p class="section-magazine-col_date"><?php echo get_the_date('F Y', $magazine->ID)?></p>
 			</div>
 		</div>
 		<?php
@@ -31,7 +74,8 @@ function load_more_magazines() {
 
 	echo json_encode(array(
 		'offset' => $offset + count($magazines),
-		'html' => $html
+		'html' => $html,
+        'total' => $total
 	));
 
 	die();
@@ -39,7 +83,6 @@ function load_more_magazines() {
 
 add_action("wp_ajax_load_more_magazines", "load_more_magazines");
 add_action("wp_ajax_nopriv_load_more_magazines", "load_more_magazines");
-
 
 function load_home_products() {
 
