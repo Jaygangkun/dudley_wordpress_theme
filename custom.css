@@ -18,8 +18,13 @@
     font-family: "Brandon Grotesque";
     src: url("assets/fonts/brandon-grotesque-regular.ttf");
 }
+
 body {
     background: #FFFCF3;
+}
+
+body.page-template-page-directory section{
+    background: #E7E2D4;
 }
 
 .container-lg {
@@ -476,6 +481,8 @@ h1 {
 
 .section-feature-img {
     width: 100%;
+    max-height: 415px;
+    object-fit: cover;
 }
 
 .section-feature-title {
@@ -484,6 +491,7 @@ h1 {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    font-size: 80px;
 }
 
 .section-feature-list {
@@ -498,9 +506,9 @@ h1 {
 }
 
 .section-feature-col-title {
-    font-family: 'Brandon Grotesque';
+    font-family: 'Playfair Display';
     font-style: normal;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 15px;
     line-height: 21px;
 
@@ -587,7 +595,7 @@ h1 {
     font-weight: 400;
     font-size: 15px;
     line-height: 21px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 
     color: #000000;
 }
@@ -670,6 +678,7 @@ h1 {
 
 .trustpilot-img {
     margin: auto;
+    width: 225px;
 }
 
 .section-shop-hero {
@@ -709,6 +718,7 @@ h1 {
 
 .section-directory-sort-title {
     margin-right: 0px;
+    text-transform: uppercase;
 }
 
 .section-products-filter-btn {
@@ -965,7 +975,7 @@ h1 {
 .story-hero-title {
     text-align: center;
     color: #000000;
-    max-width: 1096px;
+    /* max-width: 1096px; */
     margin: auto;
 }
 
@@ -1000,6 +1010,12 @@ h1 {
 
 .section-story-content-img-col {
     width: calc(50% - 10px);
+}
+
+.section-story-main-img {
+    height: 415px;
+    object-fit: cover;
+    object-position: top;
 }
 
 .section-story-tasks-title {
@@ -1287,6 +1303,7 @@ h1 {
     width: calc(25% - 22px);
     margin-bottom: 25px;
     margin: 0px 11px;
+    margin-bottom: 22px;
 }
 
 .directory-list-col-img-wrap {
@@ -1329,6 +1346,12 @@ h1 {
     line-height: 21px;
 
     color: #000000;
+    margin-bottom: 10px;
+}
+
+.directory-list-col .text-link {
+    color: #000000;
+    text-transform: uppercase;
 }
 
 .section-dogcast-hero_title {
@@ -1381,7 +1404,9 @@ h1 {
     height: 0px;
     padding-top: 100%;
     margin-bottom: 30px;
-    background: grey;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .section-dogcast-list-col_vtitle {
@@ -1444,7 +1469,7 @@ h1 {
 .section-img-hero {
     width: 100%;
     height: 0px;
-    padding-top: 43%;
+    padding-top: 415px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -1760,6 +1785,10 @@ h1 {
 
     .section-single-magazine-hero {
         padding-top: 50%;
+    }
+
+    .trustpilot-img {
+        width: initial;
     }
 }
 /* 781px */

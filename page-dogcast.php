@@ -29,7 +29,7 @@
 	<div class="container-lg">
 		<div class="section-dogcast-list-wrap">
 			<div class="section-dogcast-list-col">
-				<div class="section-dogcast-list-col-img-wrap">
+				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast1.png)">
 					<h5 class="section-dogcast-list-col_vtitle">The Dudley Questionnaire Rosemary Ferguson</h5>
 				</div>
 				<h6 class="section-dogcast-list-col_title">The Dudley Questionnaire: Rosemary Ferguson</h6>
@@ -37,7 +37,7 @@
 				<p class="section-dogcast-list-col_date">March 2022</p>
 			</div>
 			<div class="section-dogcast-list-col">
-				<div class="section-dogcast-list-col-img-wrap">
+				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast2.png)">
 					<h5 class="section-dogcast-list-col_vtitle">The Dudley Questionnaire Rosemary Ferguson</h5>
 				</div>
 				<h6 class="section-dogcast-list-col_title">The Dudley Questionnaire: Rosemary Ferguson</h6>
@@ -45,7 +45,7 @@
 				<p class="section-dogcast-list-col_date">March 2022</p>
 			</div>
 			<div class="section-dogcast-list-col">
-				<div class="section-dogcast-list-col-img-wrap">
+				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast3.png)">
 					<h5 class="section-dogcast-list-col_vtitle">The Dudley Questionnaire Rosemary Ferguson</h5>
 				</div>
 				<h6 class="section-dogcast-list-col_title">The Dudley Questionnaire: Rosemary Ferguson</h6>

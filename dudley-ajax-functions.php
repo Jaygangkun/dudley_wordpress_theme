@@ -361,9 +361,17 @@ function load_directories() {
         <div class="directory-list-col">
             <div class="directory-list-col-wrap">
                 <div class="directory-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
-                <a class="text-link" href="<?php echo get_field('product_link', $product->ID)?>"><h6 class="directory-list-col-title"><?php echo get_the_title($product->ID)?></h6></a>
+                <h6 class="directory-list-col-title"><?php echo get_the_title($product->ID)?></h6>
                 <p class="directory-list-col-brand"><?php echo get_field('brand', $product->ID)?></p>
                 <p class="directory-list-col-price"><?php echo get_field('price', $product->ID)?></p>
+                <a class="text-link" href="<?php echo get_field('product_link', $product->ID)?>">
+                <?php 
+                    $url = get_field('product_link', $product->ID);
+                    $urlParts = parse_url($url);
+                    $url = preg_replace('/^www\./', '', $urlParts['host']);
+                    echo $url;
+                ?>
+                </a>
             </div>
         </div>
         <?php
