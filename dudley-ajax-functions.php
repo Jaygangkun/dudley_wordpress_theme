@@ -388,4 +388,54 @@ function load_directories() {
 add_action("wp_ajax_load_directories", "load_directories");
 add_action("wp_ajax_nopriv_load_directories", "load_directories");
 
+function login() {
+    $info = array();
+    $info['user_login'] = $_POST['email'];
+    $info['user_password'] = $_POST['password'];
+    $info['remember'] = true;
+
+    $user_signon = wp_signon( $info, false );
+    if ( is_wp_error($user_signon) ){
+        echo json_encode(array(
+            'success' => false, 
+            'message' => 'Wrong username or password.'
+        ));
+    } else {
+        echo json_encode(array(
+            'success' => true
+        ));
+    }
+
+    die();
+}
+
+add_action("wp_ajax_login", "login");
+add_action("wp_ajax_nopriv_login", "login");
+
+function signup() {
+    $user_params = array (
+        'display_name' 	=> $_POST['fullname'],
+        'user_login' 	=> $_POST['email'],
+        'user_pass' 	=> $_POST['password'],
+        'role' 			=> 'subscriber'
+    );
+
+    $user_id = wp_insert_user( $user_params );
+    if( is_wp_error( $user_id ) ) {
+        echo json_encode(array(
+            'success' => false, 
+            'message' => $user_id->get_error_message()
+        ));
+    } else {
+        update_user_meta($user_id, 'join', $_POST['join']);
+        echo json_encode(array(
+            'success' => true
+        ));
+    }
+
+	die();
+}
+
+add_action("wp_ajax_signup", "signup");
+add_action("wp_ajax_nopriv_signup", "signup");
 ?>

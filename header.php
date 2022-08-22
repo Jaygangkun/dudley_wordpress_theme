@@ -39,14 +39,14 @@
 					<a class="header-menu-link" href='/our-story'>our story</a>
 				</div>
 				<div class="header-right-menus-wrap">
-					<a class="header-account-link" href="#">
+					<a class="header-account-link" href="/login">
 						<img class="header-account-link_img" src="<?php echo get_template_directory_uri()?>/assets/images/icon-account.png">
 					</a>
 					<a class="header-cart-link" href="/cart">
 						<img class="header-cart-link_img" src="<?php echo get_template_directory_uri()?>/assets/images/icon-cart.png">
 						<span class="header-cart-link_count" id="header_cart_count"><?php echo WC()->cart->get_cart_contents_count();?></span>
 					</a>
-					<span class="header-hamburger-link" href="/cart">
+					<span class="header-hamburger-link">
 						<img class="header-hamburger-link_img" src="<?php echo get_template_directory_uri()?>/assets/images/icon-3lines.png">
 					</span>
 				</div>

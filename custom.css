@@ -64,6 +64,10 @@ h1 {
     text-decoration: none;
 }
 
+.text-black {
+    color: #000000;
+}
+
 .btn {
     cursor: pointer;
     text-decoration: none;
@@ -84,6 +88,10 @@ h1 {
 
 .btn-black:hover {
 
+}
+
+.text-center {
+    text-align: center;
 }
 
 .btn-lg {
@@ -1549,6 +1557,153 @@ h1 {
     height: 10px;
     background: #C2B5C7;
     z-index: -1;
+}
+
+.section-account-form-desc {
+    color: #000000;
+}
+
+.section-account-form-desc a {
+    text-decoration: underline;
+    color: #000000;
+}
+
+.account-form-input-group,
+.account-form-group {
+    margin-bottom: 21px;
+}
+
+.account-form-wrap {
+    margin: auto;
+    margin-top: 50px;
+    max-width: 426px;
+}
+
+.account-form-input-group {
+    border-bottom: 1px solid #000000;
+    background: #ffffff;
+}
+
+.account-form-input-group.has-button {
+    position: relative;
+    cursor: pointer;
+}
+
+.account-form-input-group-button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.account-form-input-group input,
+.account-form-input-group select {
+    background: transparent;
+    padding: 15px;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 420;
+    font-size: 15px;
+    line-height: 21px;
+
+    color: #676161;
+    box-shadow: initial;
+    width: 100%;
+    border: 0px;
+}
+
+.account-form-input-group.has-button input {
+    margin-right: 15px;
+    flex-grow: 1;
+}
+
+.section-account-form h1 {
+    margin-bottom: 10px;
+}
+
+.section-account-form {
+    padding-top: 90px;
+    padding-bottom: 180px;
+}
+
+a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[type="button"]:focus, input[type="reset"]:focus, input[type="submit"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus, select:focus {
+    outline: none;
+}
+
+.account-form-group a {
+    text-decoration: underline;
+    color: #000000;
+}
+
+/* Customize the label (the container) */
+.account-form-checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 390;
+    font-size: 15px;
+    line-height: 21px;
+}
+
+/* Hide the browser's default radio button */
+.account-form-checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom radio button */
+.account-form-checkbox-container .checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 1px solid #000000;
+}
+
+/* On mouse-over, add a grey background color */
+.account-form-checkbox-container:hover input ~ .checkmark {
+    /* background-color: #ccc; */
+}
+
+/* When the radio button is checked, add a blue background */
+.account-form-checkbox-container input:checked ~ .checkmark {
+    background-color: #000000;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.account-form-checkbox-container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.account-form-checkbox-container input:checked ~ .checkmark:after {
+    /* display: block; */
+}
+
+/* Style the indicator (dot/circle) */
+.account-form-checkbox-container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
 }
 
 @media screen and (max-width: 1470px) {
