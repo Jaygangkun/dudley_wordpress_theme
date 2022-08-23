@@ -147,7 +147,7 @@ h1 {
     font-size: 14px;
     line-height: 20px;
     color: #E5E5E5;
-    background: transparent;
+    background: #f8f8f8 !important;
     outline: none !important;
     box-shadow: initial;
 }
@@ -1704,6 +1704,46 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     height: 8px;
     border-radius: 50%;
     background: white;
+}
+
+.section-legal {
+    padding-top: 95px;
+    padding-bottom: 60px;
+    position: relative;
+    min-height: 420px;
+}
+
+.section-legal-menus {
+    position: absolute;
+    left: calc(50% - 690px);
+}
+
+.section-legal-menu-link-wrap {
+    margin-bottom: 10px;
+}
+
+.section-legal-menu-link {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 33px;
+
+    color: #000000;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.section-legal-menu-link.active::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    background: #C2B5C7;
+    bottom: 0px;
+    height: 16px;
+    z-index: -1;
 }
 
 @media screen and (max-width: 1470px) {

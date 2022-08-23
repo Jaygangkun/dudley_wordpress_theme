@@ -416,6 +416,7 @@ function signup() {
     $user_params = array (
         'display_name' 	=> $_POST['fullname'],
         'user_login' 	=> $_POST['email'],
+        'user_email' 	=> $_POST['email'],
         'user_pass' 	=> $_POST['password'],
         'role' 			=> 'subscriber'
     );
@@ -427,9 +428,15 @@ function signup() {
             'message' => $user_id->get_error_message()
         ));
     } else {
-        update_user_meta($user_id, 'join', $_POST['join']);
+        update_user_meta($user_id, 'join', $_POST['join'] == 'true' ? "1" : "0");
+
+        if($_POST['join'] == 'true') {
+            $response = subscribeKlaviyo($_POST['email']);
+        }
+
         echo json_encode(array(
-            'success' => true
+            'success' => true,
+            'klaviyo' => $response
         ));
     }
 
@@ -438,4 +445,65 @@ function signup() {
 
 add_action("wp_ajax_signup", "signup");
 add_action("wp_ajax_nopriv_signup", "signup");
+
+function subscribeKlaviyo($email) {
+    $klaviyo_list = 'SKD4Zf';
+    $klaviyo_api = 'pk_70b0dc16b447444e8af286dda981ef3a69';
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://a.klaviyo.com/api/v2/list/'.$klaviyo_list.'/members?api_key='.$klaviyo_api,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS =>'{
+         "profiles": [
+              {
+                   "email": "'.$email.'"
+              }
+         ]
+    }',
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json',
+        'Cookie: __cf_bm=5dKySX.ZtPqP4QNDpO5hf23XWYjjGy_nBqwB6YtYJnU-1661182881-0-AU0PiOuB3D6EdVY4W18jLZYOveVWvay5Ee7UqERF0NGNTPv4lEvNX5yXCJbjURWzH/0xSvxPr3lrsK1FHOy4HY0='
+      ),
+    ));
+    
+    $response = curl_exec($curl);
+    
+    curl_close($curl);
+    return $response;
+}
+
+function subscribe_newsletter() {
+    $user_params = array (
+        'user_login' 	=> $_POST['email'],
+        'role' 			=> 'subscriber'
+    );
+
+    $user_id = wp_insert_user( $user_params );
+    if( is_wp_error( $user_id ) ) {
+        echo json_encode(array(
+            'success' => false, 
+            'message' => $user_id->get_error_message()
+        ));
+    } else {
+        update_user_meta($user_id, 'join', true);
+        $response = subscribeKlaviyo($_POST['email']);
+        echo json_encode(array(
+            'success' => true,
+            'klaviyo' => $response
+        ));
+    }
+
+	die();
+}
+
+add_action("wp_ajax_subscribe_newsletter", "subscribe_newsletter");
+add_action("wp_ajax_nopriv_subscribe_newsletter", "subscribe_newsletter");
 ?>

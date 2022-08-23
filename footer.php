@@ -19,8 +19,8 @@
 			<div class="footer-menu-group">
 				<h6 class="footer-menu-group-title">information</h6>
 				<ul>
-					<li><a class="footer-menu-link" href="">Our Story</a></li>
-					<li><a class="footer-menu-link" href="">Shipping & Returns</a></li>
+					<li><a class="footer-menu-link" href="/our-story">Our Story</a></li>
+					<li><a class="footer-menu-link" href="/legal?subpage=shipping-returns">Shipping & Returns</a></li>
 					<li><a class="footer-menu-link" href="">Doggie Do-Gooders</a></li>
 					<li><a class="footer-menu-link" href="">Sizing your Dog</a></li>
 				<ul>
@@ -28,8 +28,8 @@
 			<div class="footer-menu-group">
 				<h6 class="footer-menu-group-title">legal</h6>
 				<ul>
-					<li><a class="footer-menu-link" href="">Terms & Condition</a></li>
-					<li><a class="footer-menu-link" href="">Privacy Policy</a></li>
+					<li><a class="footer-menu-link" href="/legal?subpage=terms-conditions">Terms & Condition</a></li>
+					<li><a class="footer-menu-link" href="/legal?subpage=privacy-policy">Privacy Policy</a></li>
 				<ul>
 			</div>
 			<div class="footer-menu-group">
@@ -42,13 +42,13 @@
 				<ul>
 			</div>
 			<div class="footer-space"></div>
-			<div class="footer-newsletter">
+			<div class="footer-newsletter newsletter-form">
 				<h2 class="footer-newsletter-title">Sign up to our mailing list</h2>
 				<div class="input-btn-group">
-					<input type="text" placeholder="Enter your email">
-					<span class="btn btn-black btn-sm">Sign up</span>
+					<input type="text" placeholder="Enter your email" class="input-email">
+					<span class="btn btn-black btn-sm btn-newsletter">Sign up</span>
 				</div>
-				<p class="newsletter-input-desc fs-15">By signing up you agree to our <a class="link" href="">Privacy Policy</a> and <a class="" href="">Terms and Conditions</a></p>
+				<p class="newsletter-input-desc fs-15">By signing up you agree to our <a class="link" href="/legal?subpage=privacy-policy">Privacy Policy</a> and <a class="" href="/legal?subpage=terms-conditions">Terms and Conditions</a></p>
 			</div>
 		</div>
 		<div class="footer-bottom">
@@ -128,6 +128,34 @@
 				// setTimeout(function(){
 				// 	jQuery('.woocommerce-notices-wrapper').slideUp();
 				// }, 3000);
+			}
+		})
+	})
+
+	jQuery(document).on('click', '.newsletter-form .btn-newsletter', function() {
+		var newsletter_form = jQuery(this).parents('.newsletter-form');
+		if(jQuery(newsletter_form).find('.input-email').val() == '') {
+			alert('Please Input Email');
+			jQuery(newsletter_form).find('.input-email').focus();
+			return;
+		}
+
+		jQuery.ajax({
+			url: ajax_url,
+			type: 'post',
+			data: {
+				action: 'subscribe_newsletter',
+				email: jQuery(newsletter_form).find('.input-email').val()
+			},
+			dataType: 'json',
+			success: function(resp) {
+				if(resp.success) {
+					alert('Done Successfully!');
+				}
+				else {
+					alert(resp.message);
+				}
+				
 			}
 		})
 	})

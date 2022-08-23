@@ -50,12 +50,12 @@
 			<div class="section-newsletter-wrap-left">
 				<h1 class="newsletter-title"><span class="text-highlight text-highlight-white">Sign Up</span> For Dudley & Co News</h1>
 			</div>
-			<div class="section-newsletter-wrap-right">
+			<div class="section-newsletter-wrap-right newsletter-form">
 				<div class="input-btn-group">
-					<input type="text" placeholder="Enter your email">
-					<span class="btn btn-black btn-sm">Sign up</span>
+					<input type="text" placeholder="Enter your email" class="input-email">
+					<span class="btn btn-black btn-sm btn-newsletter">Sign up</span>
 				</div>
-				<p class="newsletter-input-desc fs-15">By signing up you agree to our <a class="link" href="">Privacy Policy</a> and <a class="" href="">Terms and Conditions</a></p>
+				<p class="newsletter-input-desc fs-15">By signing up you agree to our <a class="link" href="/legal?subpage=privacy-policy">Privacy Policy</a> and <a class="" href="/legal?subpage=terms-conditions">Terms and Conditions</a></p>
 			</div>
 		</div>
 	</div>

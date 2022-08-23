@@ -33,7 +33,7 @@
 				</select>
 			</div>
 			<div class="account-form-group">
-				<label class="account-form-checkbox-container">By signing up you agree to our <a class="" href="">Privacy Policy</a> and <a href="">Terms and Conditions</a>
+				<label class="account-form-checkbox-container">By signing up you agree to our <a class="" href="/legal?subpage=privacy-policy">Privacy Policy</a> and <a href="/legal?subpage=terms-conditions">Terms and Conditions</a>
 					<input type="checkbox" id="agree">
 					<span class="checkmark"></span>
 				</label>
@@ -100,6 +100,7 @@
 			dataType: 'json',
 			success: function(resp) {
 				if(resp.success) {
+					alert('Signup Successfully!');
 					location.href = '/login';
 				}
 				else {
