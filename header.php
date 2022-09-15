@@ -23,7 +23,7 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 	<div class="header-alert">
-		<span class="header-alert-text">our product guarented for life*</span>
+		<span class="header-alert-text">Our products guarenteed for life*</span>
 	</div>
 	<div class="header">
 		<div class="container-lg">

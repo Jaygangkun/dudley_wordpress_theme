@@ -445,7 +445,7 @@ h1 {
 .product-list-col-title {
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 15px;
     line-height: 21px;
 
@@ -458,7 +458,7 @@ h1 {
 .product-list-col-price {
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 15px;
     line-height: 21px;
 
@@ -476,7 +476,7 @@ h1 {
     color: #000000;
     height: 64px;
     overflow: hidden;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 }
 
 .product-list-col-btn {
@@ -499,7 +499,6 @@ h1 {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: 80px;
 }
 
 .section-feature-list {
@@ -657,6 +656,7 @@ h1 {
     line-height: 21px;
 
     color: #000000;
+    margin-bottom: 0px;
 }
 
 .section-instagrams {
@@ -1287,6 +1287,7 @@ h1 {
 
 .directory-filter-btn.active {
     position: relative;
+    z-index: 0;
 }
 
 .directory-filter-btn.active::after {
@@ -1322,6 +1323,7 @@ h1 {
     background-repeat: no-repeat;
     background-position: center;
     margin-bottom: 18px;
+    background-color: #FFFCF3;
 }
 
 .directory-list-col-title {
@@ -1491,7 +1493,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .product-list-detail-variant-col {
@@ -1744,6 +1746,21 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     bottom: 0px;
     height: 16px;
     z-index: -1;
+}
+
+.product-detail-variant-select select {
+    width: 100%;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 390;
+    font-size: 12px;
+    line-height: 17px;
+    padding: 5px 10px;
+    color: #000000;
+}
+
+.entry-header .entry-title {
+    margin-bottom: 30px;
 }
 
 @media screen and (max-width: 1470px) {

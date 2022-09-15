@@ -11,19 +11,25 @@
  */
 
 get_header();
-
-/* Start the Loop */
-while ( have_posts() ) :
-	?>
-	<div class="page-container">
-		<div class="container-lg">
+?>
+<section class="section-legal">
+	<div class="container-sm">
+		<div class="section-single-magazine-content">
 			<?php
-			the_post();
-			get_template_part( 'content', 'page' );
+			while ( have_posts() ) :
+				?>
+				<div class="page-container">
+					<div class="container-lg">
+						<?php
+						the_post();
+						get_template_part( 'content', 'page' );
+						?>
+					</div>
+				</div>
+				<?php
+			endwhile; // End of the loop.
 			?>
 		</div>
 	</div>
-	<?php
-endwhile; // End of the loop.
-
-get_footer();
+</section>
+<?php get_footer() ?>

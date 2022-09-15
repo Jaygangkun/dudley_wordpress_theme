@@ -30,6 +30,11 @@
 			<div class="account-form-input-group">
 				<select id="hear">
 					<option value="">How did you hear about us?</option>
+					<option value="Search Engine">Search Engine</option>
+					<option value="Online Advertising">Online Advertising</option>
+					<option value="In the Press">In the Press</option>
+					<option value="Word of Mouth">Word of Mouth</option>
+					<option value="Other">Other</option>
 				</select>
 			</div>
 			<div class="account-form-group">

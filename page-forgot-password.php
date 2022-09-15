@@ -1,6 +1,6 @@
 <?php
 /**
-* Template Name: Account Login Page
+* Template Name: Forgot Password Page
 *
 * @package WordPress
 * @subpackage 
@@ -12,17 +12,13 @@
 
 <section class="section-account-form">
 	<div class="container-sm">
-		<h1 class="text-center">Login to your account</h1>
-		<p class="section-account-form-desc text-center">Don’t have an account? <a class="" href="/signup">Create one</a></p>
+		<h1 class="text-center">Forgot Password</h1>
+		<p class="section-account-form-desc text-center">Remembered your password? <a class="" href="/login">Return to Login</a></p>
 		<div class="account-form-wrap">
 			<div class="account-form-input-group">
 				<input type="text" id="email" placeholder="Enter your email">
 			</div>
-			<div class="account-form-input-group has-button">
-				<input type="password" id="password" placeholder="Password">
-				<a class="account-form-input-group-button text-black" href="/forgot-password">Forgot?</a>
-			</div>
-			<span class="w-100 btn btn-black btn-sm" id="btn_login">Login</span>
+			<span class="w-100 btn btn-black btn-sm" id="btn_login">Submit</span>
 		</div>
 	</div>
 	

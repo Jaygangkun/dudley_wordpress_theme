@@ -96,7 +96,7 @@
 				?>
 				<div class="product-list-col" data-product-variants="<?php echo $variations_attr;?>" data-product-initial-price="<?php echo function_exists( 'wc_esc_json' ) ? wc_esc_json( $product_obj->get_price_html() ) : _wp_specialchars( $product_obj->get_price_html(), ENT_QUOTES, 'UTF-8', true )?>">
 					<div class="product-list-col-wrap">
-						<div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
+						<a href="href="<?php echo get_permalink($product->ID)?>"><div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div></a>
 						<a class="text-link" href="<?php echo get_permalink($product->ID)?>"><h6 class="product-list-col-title"><?php echo get_the_title($product->ID)?></h6></a>
 						<p class="product-list-col-price"><?php echo $product_obj->get_price_html();?></p>
 						<div class="product-list-detail-variants-row">
@@ -105,7 +105,6 @@
 								?>
 								<div class="product-list-detail-variant-col">
 									<div class="product-detail-variant-wrap">
-										<div class="product-detail-variant-title"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></div>
 										<div class="product-detail-variant-select">
 											<?php
 											wc_dropdown_variation_attribute_options(

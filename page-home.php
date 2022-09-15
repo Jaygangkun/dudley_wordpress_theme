@@ -19,7 +19,7 @@
 				<div class="hero-slide-wrap">
 					<div class="hero-slide-wrap-left">
 						<h1 class="hero-slide-text">Dudley & Co is a British label for dogs, and the humans who love them. Our products deliver on the promise of <span class="text-highlight">‘luxury that lasts’.</span></h1>
-						<a class="btn btn-black btn-lg" href="">shop the collection</a>
+						<a class="btn btn-black btn-lg" href="/shop">shop the collection</a>
 					</div>
 					<div class="hero-slide-wrap-right">
 						<div class="hero-slide-img-wrap">
@@ -32,7 +32,7 @@
 				<div class="hero-slide-wrap">
 					<div class="hero-slide-wrap-left">
 						<h1 class="hero-slide-text">Dudley & Co is a British label for dogs, and the humans who love them. Our products deliver on the promise of <span class="text-highlight">‘luxury that lasts’.</span></h1>
-						<a class="btn btn-black btn-lg" href="">shop the collection</a>
+						<a class="btn btn-black btn-lg" href="/shop">shop the collection</a>
 					</div>
 					<div class="hero-slide-wrap-right">
 						<div class="hero-slide-img-wrap">
@@ -112,13 +112,20 @@
 						<div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
 						<a class="text-link" href="<?php echo get_permalink($product->ID)?>"><h6 class="product-list-col-title"><?php echo get_the_title($product->ID)?></h6></a>
 						<p class="product-list-col-price"><?php echo $product_obj->get_price_html();?></p>
+						<p class="product-list-col-desc">
+							<?php 
+							$excerpt = get_the_excerpt($product->ID);
+							$excerpt = substr($excerpt, 0, 260);
+							$result = substr($excerpt, 0, strrpos($excerpt, ' '));
+							echo $result;
+							?>
+						</p>
 						<div class="product-list-detail-variants-row">
 							<?php
 							foreach ( $attributes as $attribute_name => $options ) {
 								?>
 								<div class="product-list-detail-variant-col">
 									<div class="product-detail-variant-wrap">
-										<div class="product-detail-variant-title"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></div>
 										<div class="product-detail-variant-select">
 											<?php
 											wc_dropdown_variation_attribute_options(
@@ -126,6 +133,7 @@
 													'options'   => $options,
 													'attribute' => $attribute_name,
 													'product'   => $product_obj,
+													'show_option_none'=> 'Choose '.wc_attribute_label( $attribute_name )
 												)
 											);
 											?>
@@ -138,14 +146,6 @@
 						</div>
 						<input type='hidden' name="variant_id">
 						<input type='hidden' name="product_id" value="<?php echo $product->ID?>">
-						<p class="product-list-col-desc">
-							<?php 
-							$excerpt = get_the_excerpt($product->ID);
-							$excerpt = substr($excerpt, 0, 260);
-							$result = substr($excerpt, 0, strrpos($excerpt, ' '));
-							echo $result;
-							?>
-						</p>
 						<span class="btn btn-black btn-lg product-list-col-btn btn-add-cart">Add To Basket</span>
 					</div>
 				</div>

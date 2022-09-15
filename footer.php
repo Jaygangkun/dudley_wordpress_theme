@@ -35,10 +35,10 @@
 			<div class="footer-menu-group">
 				<h6 class="footer-menu-group-title">follow us</h6>
 				<ul>
-					<li><a class="footer-menu-link" href="">Facebook</a></li>
+					<li><a class="footer-menu-link" href="https://www.facebook.com/dudleyandco/shop/">Facebook</a></li>
 					<li><a class="footer-menu-link" href="">Twitter</a></li>
 					<li><a class="footer-menu-link" href="">Pinterest</a></li>
-					<li><a class="footer-menu-link" href="">Instagram</a></li>
+					<li><a class="footer-menu-link" href="https://www.instagram.com/wearedudleyandco/">Instagram</a></li>
 				<ul>
 			</div>
 			<div class="footer-space"></div>
