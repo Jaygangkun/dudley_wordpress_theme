@@ -16,7 +16,7 @@
             </a>
 		</div>
 		<div class="trustpilot-img-wrap">
-			<img class="trustpilot-img" src="<?php echo get_template_directory_uri()?>/assets/images/trustpilot.png">
+			<img class="trustpilot-img" src="<?php echo get_template_directory_uri()?>/assets/images/trustpilot.svg">
 		</div>
 	</div>
 </section>

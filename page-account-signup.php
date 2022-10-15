@@ -15,14 +15,15 @@
 		<h1 class="text-center">Create an account</h1>
 		<p class="section-account-form-desc text-center">Already have account? <a class="" href="/login">Login</a></p>
 		<div class="account-form-wrap">
+			<div class="form-success-message" id="signup_success" style="display: none"></div>
 			<div class="account-form-input-group">
 				<input type="text" id="fullname" placeholder="Full name*">
 			</div>
 			<div class="account-form-input-group">
-				<input type="text" id="email" placeholder="Enter your email">
+				<input type="text" id="email" placeholder="Enter your email*">
 			</div>
 			<div class="account-form-input-group">
-				<input type="password" id="password" placeholder="Password">
+				<input type="password" id="password" placeholder="Password*">
 			</div>
 			<div class="account-form-input-group">
 				<input type="password" id="repassword" placeholder="Re type password">
@@ -50,6 +51,7 @@
 				</label>
 			</div>
 			<span class="w-100 btn btn-black btn-sm" id="btn_signup">Signup</span>
+			<div class="form-warnning-message" id="signup_warnning" style="display: none">Please  check our privacy policy and terms and conditions</div>
 		</div>
 	</div>
 	
@@ -57,41 +59,64 @@
 <script>
 	jQuery(document).on('click', '#btn_signup', function() {
 		
+		jQuery('#signup_success').hide();
+
+		var has_error = false;
 		if(jQuery('#fullname').val() == '') {
-			alert('Please Input Full name');
-			jQuery('#fullname').focus();
-			return;
+			jQuery('#fullname').parent().addClass('has-error');
+			has_error = true;
+		}
+		else {
+			jQuery('#fullname').parent().removeClass('has-error');
 		}
 
 		if(jQuery('#email').val() == '') {
-			alert('Please Input Email');
-			jQuery('#email').focus();
-			return;
+			jQuery('#email').parent().addClass('has-error');
+			has_error = true;
+		}
+		else {
+			jQuery('#email').parent().removeClass('has-error');
 		}
 
 		if(jQuery('#password').val() == '') {
-			alert('Please Input Password');
-			jQuery('#password').focus();
-			return;
+			jQuery('#password').parent().addClass('has-error');
+			has_error = true;
+		}
+		else {
+			jQuery('#password').parent().removeClass('has-error');
 		}
 
 		if(jQuery('#repassword').val() == '') {
-			alert('Please Input Re Password');
-			jQuery('#repassword').focus();
-			return;
+			jQuery('#repassword').parent().addClass('has-error');
+			has_error = true;
+		}
+		else {
+			jQuery('#repassword').parent().removeClass('has-error');
 		}
 
-		if(jQuery('#password').val() != jQuery('#repassword').val()) {
-			alert('Please Match Re Type Password');
-			jQuery('#repassword').focus();
-			return;
+		if(jQuery('#password').val() != '' && jQuery('#password').val() != jQuery('#repassword').val()) {
+			jQuery('#repassword').parent().addClass('has-error');
+			has_error = true;
+		}
+		else {
+			jQuery('#repassword').parent().removeClass('has-error');
 		}
 
 		if(!jQuery('#agree').is(':checked')) {
-			alert('Please check agree to our privacy policy and terms and conditions');
+			// alert('Please check agree to our privacy policy and terms and conditions');
+			jQuery('#signup_warnning').text('Please  check our privacy policy and terms and conditions');
+			jQuery('#signup_warnning').show();
+			has_error = true;
+		}
+		else {
+			jQuery('#signup_warnning').hide();
+		}
+
+		if(has_error) {
 			return;
 		}
 
+		jQuery('body').addClass('loading');
 		jQuery.ajax({
 			url: ajax_url,
 			type: 'post',
@@ -100,17 +125,22 @@
 				fullname: jQuery('#fullname').val(),
 				email: jQuery('#email').val(),
 				password: jQuery('#password').val(),
+				hear: jQuery('#hear').val(),
 				join: jQuery('#join').is(':checked')
 			},
 			dataType: 'json',
 			success: function(resp) {
 				if(resp.success) {
-					alert('Signup Successfully!');
-					location.href = '/login';
+					jQuery('#signup_success').text('Signup Successfully!');
+					jQuery('#signup_success').show();
+					// location.href = '/login';
 				}
 				else {
-					alert(resp.message);
+					jQuery('#signup_warnning').text(resp.message);
+					jQuery('#signup_warnning').show();
 				}
+
+				jQuery('body').removeClass('loading');
 			}
 		})
 	})

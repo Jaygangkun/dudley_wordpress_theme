@@ -44,10 +44,12 @@
 			<div class="footer-space"></div>
 			<div class="footer-newsletter newsletter-form">
 				<h2 class="footer-newsletter-title">Sign up to our mailing list</h2>
+				<div class="newsletter-success" style="display:none"></div>
 				<div class="input-btn-group">
 					<input type="text" placeholder="Enter your email" class="input-email">
 					<span class="btn btn-black btn-sm btn-newsletter">Sign up</span>
 				</div>
+				<div class="newsletter-error" style="display:none"></div>
 				<p class="newsletter-input-desc fs-15">By signing up you agree to our <a class="link" href="/legal?subpage=privacy-policy">Privacy Policy</a> and <a class="" href="/legal?subpage=terms-conditions">Terms and Conditions</a></p>
 			</div>
 		</div>
@@ -57,10 +59,20 @@
 		</div>
 	</div>
 </div>
-
+<div class="loading-screen">
+	<div class="loading-screen-icon"></div>
+</div>
 <?php wp_footer(); ?>
 <script>
-	var price_symbol = '<?php echo get_woocommerce_currency_symbol();?>';
+	jQuery(document).on('click', '.header-hamburger-link', function() {
+		if(jQuery('body').hasClass('mobile-menu')) {
+			jQuery('body').removeClass('mobile-menu');
+		}
+		else {
+			jQuery('body').addClass('mobile-menu');
+		}
+	})
+
 	jQuery(document).on('change', '.product-list-col .product-detail-variant-select select', function() {
 		var product_list_col = jQuery(this).parents('.product-list-col');
 		var product_variations = jQuery(product_list_col).data('product-variants');
@@ -110,6 +122,7 @@
 			return;
 		}
 
+		jQuery('body').addClass('loading');
 		jQuery.ajax({
 			url: ajax_url,
 			type: 'post',
@@ -121,6 +134,7 @@
 			},
 			dataType: 'json',
 			success: function(resp) {
+				jQuery('body').removeClass('loading');
 				// jQuery('#home_products_list').html(resp.html);
 				jQuery('#header_cart_count').text(resp.count);
 				alert('Added Successfully!');
@@ -134,12 +148,16 @@
 
 	jQuery(document).on('click', '.newsletter-form .btn-newsletter', function() {
 		var newsletter_form = jQuery(this).parents('.newsletter-form');
+		jQuery(newsletter_form).find('.newsletter-error').hide();
+		jQuery(newsletter_form).find('.newsletter-success').hide();
 		if(jQuery(newsletter_form).find('.input-email').val() == '') {
-			alert('Please Input Email');
+			jQuery(newsletter_form).find('.newsletter-error').text('Please enter your email');
+			jQuery(newsletter_form).find('.newsletter-error').show();
 			jQuery(newsletter_form).find('.input-email').focus();
 			return;
 		}
 
+		jQuery('body').addClass('loading');
 		jQuery.ajax({
 			url: ajax_url,
 			type: 'post',
@@ -150,12 +168,14 @@
 			dataType: 'json',
 			success: function(resp) {
 				if(resp.success) {
-					alert('Done Successfully!');
+					jQuery(newsletter_form).find('.newsletter-success').text('Done Successfully!');
+					jQuery(newsletter_form).find('.newsletter-success').show();
 				}
 				else {
-					alert(resp.message);
+					jQuery(newsletter_form).find('.newsletter-error').text(resp.message);
+					jQuery(newsletter_form).find('.newsletter-error').show();
 				}
-				
+				jQuery('body').removeClass('loading');
 			}
 		})
 	})

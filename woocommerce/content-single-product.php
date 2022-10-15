@@ -162,7 +162,7 @@ $product_id = $product->get_id();
 											<img class="product-detail-accordion-icon_img" plus src="<?php echo get_template_directory_uri()?>/assets/images/icon-plus.png">
 										</span>
 									</div>
-									<div class="product-detail-accordion-body">
+									<div class="product-detail-accordion-body" style="display:none">
 										<?php
 										if ( isset( $product_tab['callback'] ) ) {
 											call_user_func( $product_tab['callback'], $key, $product_tab );
@@ -289,7 +289,7 @@ $product_id = $product->get_id();
 	var data_product_variations = <?php echo json_encode($main_available_variations);?>;
 	var data_product_initial_price = jQuery('.product-detail-price').html();
 
-	jQuery(document).on('change', '#product_detail .product-detail-variant-select select', function() {
+	function updatePrice() {
 		var selected_variants = [];
 		var dom_variant_selects = jQuery('#product_detail .product-detail-variant-select select');
 		for(var index = 0; index < dom_variant_selects.length; index ++) {
@@ -318,14 +318,20 @@ $product_id = $product->get_id();
 		}
 
 		if(found_variant) {
-			jQuery('#product_detail .product-detail-price').html(found_variant.price_html);
+			jQuery('#product_detail .product-detail-price').html(price_symbol + found_variant.display_price.toFixed(2) + (found_variant.is_in_stock ? '' : '<span class="stock out-of-stock">Out of stock</span>'));
 			jQuery('#product_detail #variation_id').val(found_variant.variation_id);
 		}
 		else {
 			jQuery('.product-detail-price').html(data_product_initial_price);
 			jQuery('#product_detail #variation_id').val('');
 		}
+	}
+
+	jQuery(document).on('change', '#product_detail .product-detail-variant-select select', function() {
+		updatePrice();
 	})
+
+	updatePrice();
 
 	jQuery(document).on('click', '#product_detail #btn_add_cart', function() {
 		if(jQuery('#product_detail #variation_id').val() == '') {

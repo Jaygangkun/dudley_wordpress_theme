@@ -52,9 +52,9 @@
 						<div class="section-magazine-col_desc">
 							<?php 
 							$excerpt = get_the_excerpt($magazine->ID);
-							$excerpt = substr($excerpt, 0, 260);
-							$result = substr($excerpt, 0, strrpos($excerpt, ' '));
-							echo $result;
+							// $excerpt = substr($excerpt, 0, 260);
+							// $result = substr($excerpt, 0, strrpos($excerpt, ' '));
+							echo $excerpt;
 							?>
 						</div>
 					</div>
@@ -78,6 +78,7 @@
 			}
 		}
 
+		jQuery('body').addClass('loading');
 		jQuery.ajax({
 			url: ajax_url,
 			type: 'post',
@@ -89,6 +90,7 @@
 			},
 			dataType: 'json',
 			success: function(resp) {
+				jQuery('body').removeClass('loading');
 				jQuery('#magazines_list').append(resp.html);
 				jQuery('#btn_load_more_magazines').attr('data-offset', resp.offset);
 				if(resp.offset == resp.total) {
@@ -117,6 +119,8 @@
 				cats.push(jQuery(dom_active_filters[index]).data('slug'));
 			}
 		}
+
+		jQuery('body').addClass('loading');
 		jQuery.ajax({
 			url: ajax_url,
 			type: 'post',
@@ -128,6 +132,7 @@
 			},
 			dataType: 'json',
 			success: function(resp) {
+				jQuery('body').removeClass('loading');
 				jQuery('#magazines_list').html(resp.html);
 				jQuery('#btn_load_more_magazines').attr('data-offset', resp.offset);
 				if(resp.offset == resp.total) {

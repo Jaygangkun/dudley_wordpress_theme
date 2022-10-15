@@ -15,6 +15,35 @@
 <section class="section-hero-slider">
 	<div class="container-md">
 		<div class="hero-slider">
+			<?php if( have_rows('slider') ): while ( have_rows('slider') ) : the_row(); ?>
+				<div class="">
+					<div class="hero-slide-wrap">
+						<div class="hero-slide-wrap-left">
+							<h1 class="hero-slide-text"><?php the_sub_field('description')?></h1>
+							<?php
+							$link = get_sub_field('button');
+							if($link) {
+								?>
+								<a class="btn btn-black btn-lg" href="<?php echo $link['url']?>"><?php echo $link['title']?></a>
+								<?php
+							}
+							?>
+						</div>
+						<?php
+						$img = get_sub_field('image');
+						if($img) {
+							?>
+							<div class="hero-slide-wrap-right">
+								<div class="hero-slide-img-wrap">
+									<img class="hero-slide-img" src="<?php echo $img?>">
+								</div>
+							</div>
+							<?php
+						}
+						?>
+					</div>
+				</div>
+			<?php endwhile; endif; ?>
 			<div class="">
 				<div class="hero-slide-wrap">
 					<div class="hero-slide-wrap-left">
@@ -51,10 +80,12 @@
 				<h1 class="newsletter-title"><span class="text-highlight text-highlight-white">Sign Up</span> For Dudley & Co News</h1>
 			</div>
 			<div class="section-newsletter-wrap-right newsletter-form">
+				<div class="newsletter-success" style="display:none"></div>
 				<div class="input-btn-group">
 					<input type="text" placeholder="Enter your email" class="input-email">
 					<span class="btn btn-black btn-sm btn-newsletter">Sign up</span>
 				</div>
+				<div class="newsletter-error" style="display:none"></div>
 				<p class="newsletter-input-desc fs-15">By signing up you agree to our <a class="link" href="/legal?subpage=privacy-policy">Privacy Policy</a> and <a class="" href="/legal?subpage=terms-conditions">Terms and Conditions</a></p>
 			</div>
 		</div>
@@ -98,6 +129,7 @@
 				$get_variations = count( $product_obj->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product_obj );
 				$available_variations = $get_variations ? $product_obj->get_available_variations() : false;
 				$attributes = $product_obj->get_variation_attributes();
+				ksort($attributes);
 				$selected_attributes = $product_obj->get_default_attributes();
 
 
@@ -209,6 +241,7 @@
 		jQuery('.signature-products-cat-btn').removeClass('active');
 		jQuery(this).addClass('active');
 
+		jQuery('body').addClass('loading');
 		jQuery.ajax({
 			url: ajax_url,
 			type: 'post',
@@ -218,6 +251,7 @@
 			},
 			dataType: 'json',
 			success: function(resp) {
+				jQuery('body').removeClass('loading');
 				jQuery('#home_products_list').html(resp.html);
 			}
 		})

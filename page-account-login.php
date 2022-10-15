@@ -16,32 +16,45 @@
 		<p class="section-account-form-desc text-center">Don’t have an account? <a class="" href="/signup">Create one</a></p>
 		<div class="account-form-wrap">
 			<div class="account-form-input-group">
-				<input type="text" id="email" placeholder="Enter your email">
+				<input type="text" id="email" placeholder="Enter your email*">
 			</div>
 			<div class="account-form-input-group has-button">
-				<input type="password" id="password" placeholder="Password">
+				<input type="password" id="password" placeholder="Password*">
 				<a class="account-form-input-group-button text-black" href="/forgot-password">Forgot?</a>
 			</div>
 			<span class="w-100 btn btn-black btn-sm" id="btn_login">Login</span>
+			<div class="form-warnning-message" id="login_warnning" style="display: none"></div>
 		</div>
 	</div>
 	
 </section>
 <script>
 	jQuery(document).on('click', '#btn_login', function() {
-		
+		jQuery('#login_warnning').hide();
+
+		var has_error = false;
+
 		if(jQuery('#email').val() == '') {
-			alert('Please Input Email');
-			jQuery('#email').focus();
-			return;
+			jQuery('#email').parent().addClass('has-error');
+			has_error = true;
+		}
+		else {
+			jQuery('#email').parent().removeClass('has-error');
 		}
 
 		if(jQuery('#password').val() == '') {
-			alert('Please Input Password');
-			jQuery('#password').focus();
+			jQuery('#password').parent().addClass('has-error');
+			has_error = true;
+		}
+		else {
+			jQuery('#password').parent().removeClass('has-error');
+		}
+
+		if(has_error) {
 			return;
 		}
 
+		jQuery('body').addClass('loading');
 		jQuery.ajax({
 			url: ajax_url,
 			type: 'post',
@@ -52,11 +65,13 @@
 			},
 			dataType: 'json',
 			success: function(resp) {
+				jQuery('body').removeClass('loading');
 				if(resp.success) {
 					location.href = '/';
 				}
 				else {
-					alert(resp.message);
+					jQuery('#login_warnning').text(resp.message);
+					jQuery('#login_warnning').show();
 				}
 			}
 		})

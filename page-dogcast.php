@@ -29,7 +29,7 @@
 	<div class="container-lg">
 		<div class="section-dogcast-list-wrap">
 			<div class="section-dogcast-list-col">
-				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast1.png)">
+				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast1.jpg)">
 					<h5 class="section-dogcast-list-col_vtitle">The Dudley Dog Cast Amanda Zuydervelt</h5>
 				</div>
 				<h6 class="section-dogcast-list-col_title">The Dudley Dog Cast: Amanda Zuydervelt</h6>
@@ -37,7 +37,7 @@
 				<p class="section-dogcast-list-col_date">March 2022</p>
 			</div>
 			<div class="section-dogcast-list-col">
-				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast2.png)">
+				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast2.jpg)">
 					<h5 class="section-dogcast-list-col_vtitle">The Dudley Dog Cast Ashleigh Flemming</h5>
 				</div>
 				<h6 class="section-dogcast-list-col_title">The Dudley Dog Cast: Ashleigh Flemming</h6>
