@@ -21,8 +21,8 @@
 				<ul>
 					<li><a class="footer-menu-link" href="/our-story">Our Story</a></li>
 					<li><a class="footer-menu-link" href="/legal?subpage=shipping-returns">Shipping & Returns</a></li>
-					<li><a class="footer-menu-link" href="">Doggie Do-Gooders</a></li>
-					<li><a class="footer-menu-link" href="">Sizing your Dog</a></li>
+					<li><a class="footer-menu-link" href="/doggie-do-gooders">Doggie Do-Gooders</a></li>
+					<li><a class="footer-menu-link" href="/sizing-your-dog">Sizing your Dog</a></li>
 				<ul>
 			</div>
 			<div class="footer-menu-group">
@@ -36,8 +36,6 @@
 				<h6 class="footer-menu-group-title">follow us</h6>
 				<ul>
 					<li><a class="footer-menu-link" href="https://www.facebook.com/dudleyandco/shop/">Facebook</a></li>
-					<li><a class="footer-menu-link" href="">Twitter</a></li>
-					<li><a class="footer-menu-link" href="">Pinterest</a></li>
 					<li><a class="footer-menu-link" href="https://www.instagram.com/wearedudleyandco/">Instagram</a></li>
 				<ul>
 			</div>
@@ -45,17 +43,21 @@
 			<div class="footer-newsletter newsletter-form">
 				<h2 class="footer-newsletter-title">Sign up to our mailing list</h2>
 				<div class="newsletter-success" style="display:none"></div>
+				<p class="newsletter-input-desc mobile-v fs-15">By signing up you agree to our <a class="link" href="/legal?subpage=privacy-policy">Privacy Policy</a> and <a class="" href="/legal?subpage=terms-conditions">Terms and Conditions</a></p>
 				<div class="input-btn-group">
 					<input type="text" placeholder="Enter your email" class="input-email">
 					<span class="btn btn-black btn-sm btn-newsletter">Sign up</span>
 				</div>
 				<div class="newsletter-error" style="display:none"></div>
-				<p class="newsletter-input-desc fs-15">By signing up you agree to our <a class="link" href="/legal?subpage=privacy-policy">Privacy Policy</a> and <a class="" href="/legal?subpage=terms-conditions">Terms and Conditions</a></p>
+				<p class="newsletter-input-desc desktop-v fs-15">By signing up you agree to our <a class="link" href="/legal?subpage=privacy-policy">Privacy Policy</a> and <a class="" href="/legal?subpage=terms-conditions">Terms and Conditions</a></p>
 			</div>
 		</div>
 		<div class="footer-bottom">
-			<p class="footer-copyright">© 2021 House of Dudley LtdPayment methods</p>
-			<img class="footer-bottom_img" src="<?php echo get_template_directory_uri()?>/assets/images/img-payment.png">
+			<p class="footer-copyright">© 2022 House of Dudley Ltd</p>
+			<div>
+				<p class="footer-payments">Payment methods</p>
+				<img class="footer-bottom_img" src="<?php echo get_template_directory_uri()?>/assets/images/img-payment.png">
+			</div>			
 		</div>
 	</div>
 </div>
@@ -64,6 +66,16 @@
 </div>
 <?php wp_footer(); ?>
 <script>
+	function validateEmail(email) 
+	{
+		if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
 	jQuery(document).on('click', '.header-hamburger-link', function() {
 		if(jQuery('body').hasClass('mobile-menu')) {
 			jQuery('body').removeClass('mobile-menu');
@@ -157,6 +169,13 @@
 			return;
 		}
 
+		if(!validateEmail(jQuery(newsletter_form).find('.input-email').val())) {
+			jQuery(newsletter_form).find('.newsletter-error').text('Please enter valid email');
+			jQuery(newsletter_form).find('.newsletter-error').show();
+			jQuery(newsletter_form).find('.input-email').focus();
+			return;
+		}
+		
 		jQuery('body').addClass('loading');
 		jQuery.ajax({
 			url: ajax_url,

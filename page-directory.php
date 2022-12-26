@@ -106,9 +106,9 @@ $colors = get_terms(array(
 					<div class="directory-list-col-wrap">
 						<div class="directory-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
 						<h6 class="directory-list-col-title"><?php echo get_the_title($product->ID)?></h6>
+						<p class="directory-list-col-price"><?php echo $product_obj->get_price_html()?></p>
 						<p class="directory-list-col-brand"><?php echo get_field('brand', $product->ID)?></p>
-						<p class="directory-list-col-price"><?php echo $product_obj->get_regular_price()?></p>
-						<a class="text-link" href="<?php echo $product_obj->get_product_url()?>">
+						<a class="text-link" target="_blank" href="<?php echo $product_obj->get_product_url()?>">
 						<?php 
 							$url = $product_obj->get_product_url();
 							$urlParts = parse_url($url);
@@ -169,7 +169,11 @@ $colors = get_terms(array(
 		searchDirectory();
 	})
 
-	jQuery(document).on('change', '.section-directory-select', function() {
+	jQuery(document).on('change', '#select_brand', function() {
+		searchDirectory();
+	})
+
+	jQuery(document).on('change', '#select_price_sort', function() {
 		searchDirectory();
 	})
 

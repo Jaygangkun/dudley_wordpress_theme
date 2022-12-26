@@ -24,7 +24,13 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 	<div class="header-alert">
-		<span class="header-alert-text">Our products guarenteed for life <a href="/legal?subpage=terms-conditions">*</a></span>
+		<?php
+		$header_note = get_field('header_note', 'option');
+		if(empty($header_note)) {
+			$header_note = 'Our products guarenteed for life';
+		}
+		?>
+		<span class="header-alert-text"><?php echo $header_note?> <a href="/legal?subpage=terms-conditions">*</a></span>
 	</div>
 	<div class="header">
 		<div class="container-lg">

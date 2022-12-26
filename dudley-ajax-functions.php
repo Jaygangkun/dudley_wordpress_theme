@@ -318,6 +318,14 @@ function load_directories() {
             'operator'      => 'IN'
 		);
 	}
+    else {
+        $tax_query_cat = array(
+            'taxonomy'      => 'product_cat',
+            'field'         => 'slug',
+            'terms'         => array('directory'),
+            'operator'      => 'IN'
+		);
+    }
 
     $tax_query_color = null;
     if(isset($_POST['color']) && $_POST['color'] != '') {
@@ -333,14 +341,15 @@ function load_directories() {
 		$order = 'DESC';
 	}
 
-    $meta_query = [];
+    $meta_query = null;
+
     if(isset($_POST['brand']) && $_POST['brand'] != '') {
 		$meta_query =  array(
 			array(
 				'key'      => 'brand',
-				'value'    => array($_POST['brand']),
+				'value'    => array(str_replace("\\'", "'", $_POST['brand'])),
                 'compare'  => 'IN'
-			),
+			)
 		);
 	}
     
@@ -352,7 +361,7 @@ function load_directories() {
             'posts_per_page' => -1,
             'orderby'        => 'meta_value_num',
             'order'          => $order,
-            'meta_key'       => 'price',
+            'meta_key'       => '_price',
             'tax_query'      => array(
                 'relation' => 'AND',
                 $tax_query_cat,
@@ -369,7 +378,7 @@ function load_directories() {
             'posts_per_page' => -1,
             'orderby'        => 'meta_value_num',
             'order'          => $order,
-            'meta_key'       => 'price',
+            'meta_key'       => '_price',
             'tax_query'      => array(
                 $tax_query_cat,
             ),
@@ -384,7 +393,7 @@ function load_directories() {
             'posts_per_page' => -1,
             'orderby'        => 'meta_value_num',
             'order'          => $order,
-            'meta_key'       => 'price',
+            'meta_key'       => '_price',
             'tax_query'      => array(
                 $tax_query_color
             ),
@@ -399,11 +408,11 @@ function load_directories() {
             'posts_per_page' => -1,
             'orderby'        => 'meta_value_num',
             'order'          => $order,
-            'meta_key'       => 'price',
+            'meta_key'       => '_price',
             'meta_query'    => $meta_query
         ));
     }
-	
+    
 	ob_start();
 	foreach($products as $product) {
         $product_obj = wc_get_product($product);
@@ -415,9 +424,9 @@ function load_directories() {
             <div class="directory-list-col-wrap">
                 <div class="directory-list-col-img-wrap" style="background-image:url(<?php echo wp_get_attachment_url( get_post_thumbnail_id($product->ID), 'full' );?>)"></div>
                     <h6 class="directory-list-col-title"><?php echo get_the_title($product->ID)?></h6>
+                    <p class="directory-list-col-price"><?php echo $product_obj->get_price_html()?></p>
                     <p class="directory-list-col-brand"><?php echo get_field('brand', $product->ID)?></p>
-                    <p class="directory-list-col-price"><?php echo $product_obj->get_regular_price()?></p>
-                    <a class="text-link" href="<?php echo $product_obj->get_product_url()?>">
+                    <a class="text-link" target="_blank" href="<?php echo $product_obj->get_product_url()?>">
                     <?php 
                         $url = $product_obj->get_product_url();
                         $urlParts = parse_url($url);
@@ -434,7 +443,8 @@ function load_directories() {
 	ob_end_clean();
 
 	echo json_encode(array(
-		'html' => $html
+		'html' => $html,
+        'count' => count($products)
 	));
 	die();
 }
@@ -605,7 +615,7 @@ function dudley_filter_dropdown_args( $args ) {
     return $args;
 }
 
-add_filter( 'woocommerce_quantity_input_args', 'dudley_filter_quantity_input_args', 10, 2 ); // Simple products
+// add_filter( 'woocommerce_quantity_input_args', 'dudley_filter_quantity_input_args', 10, 2 ); // Simple products
 
 function dudley_filter_quantity_input_args( $args, $product ) {
 	if ( is_singular( 'product' ) ) {
@@ -615,5 +625,10 @@ function dudley_filter_quantity_input_args( $args, $product ) {
 	// $args['min_value'] 	= 1;   	// Minimum value
 	$args['step'] 		= 1;    // Quantity steps
 	return $args;
+}
+
+// Add ACF Options Page
+if( function_exists('acf_add_options_page') ) {
+	acf_add_options_page();
 }
 ?>

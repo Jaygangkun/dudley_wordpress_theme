@@ -79,100 +79,110 @@ $product_id = $product->get_id();
 					</div>
 				</div>
 				<div class="product-details-right">
-					<?php
-					/**
-					 * Hook: woocommerce_single_product_summary.
-					 *
-					 * @hooked woocommerce_template_single_title - 5
-					 * @hooked woocommerce_template_single_rating - 10
-					 * @hooked woocommerce_template_single_price - 10
-					 * @hooked woocommerce_template_single_excerpt - 20
-					 * @hooked woocommerce_template_single_add_to_cart - 30
-					 * @hooked woocommerce_template_single_meta - 40
-					 * @hooked woocommerce_template_single_sharing - 50
-					 * @hooked WC_Structured_Data::generate_product_data() - 60
-					 */
-					// do_action( 'woocommerce_single_product_summary' );
-					
-					
-					?>
-					<?php
-					// do_action( 'woocommerce_' . $product->get_type() . '_add_to_cart' );
+					<div class="product-details-right-wrap">
+						<?php
+						/**
+						 * Hook: woocommerce_single_product_summary.
+						 *
+						 * @hooked woocommerce_template_single_title - 5
+						 * @hooked woocommerce_template_single_rating - 10
+						 * @hooked woocommerce_template_single_price - 10
+						 * @hooked woocommerce_template_single_excerpt - 20
+						 * @hooked woocommerce_template_single_add_to_cart - 30
+						 * @hooked woocommerce_template_single_meta - 40
+						 * @hooked woocommerce_template_single_sharing - 50
+						 * @hooked WC_Structured_Data::generate_product_data() - 60
+						 */
+						// do_action( 'woocommerce_single_product_summary' );
+						
+						
+						?>
+						<?php
+						// do_action( 'woocommerce_' . $product->get_type() . '_add_to_cart' );
 
-					// woocommerce_variable_add_to_cart
-					wp_enqueue_script( 'wc-add-to-cart-variation' );
-					$get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
-					$main_available_variations = $get_variations ? $product->get_available_variations() : false;
-					$attributes = $product->get_variation_attributes();
-					$selected_attributes = $product->get_default_attributes();
+						// woocommerce_variable_add_to_cart
+						wp_enqueue_script( 'wc-add-to-cart-variation' );
+						$get_variations = count( $product->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product );
+						$main_available_variations = $get_variations ? $product->get_available_variations() : false;
+						$attributes = $product->get_variation_attributes();
+						$selected_attributes = $product->get_default_attributes();
 
 
-					// single-product/add-to-cart/variable.php
-					$attribute_keys  = array_keys( $attributes );
-					$variations_json = wp_json_encode( $main_available_variations );
-					$variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_json ) : _wp_specialchars( $variations_json, ENT_QUOTES, 'UTF-8', true );
+						// single-product/add-to-cart/variable.php
+						$attribute_keys  = array_keys( $attributes );
+						$variations_json = wp_json_encode( $main_available_variations );
+						$variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_json ) : _wp_specialchars( $variations_json, ENT_QUOTES, 'UTF-8', true );
 
-					?>
-					<?php the_title( '<h1 class="product-detail-title">', '</h1>' );?>
-					<p class="product-detail-price"><?php echo $product->get_price_html(); ?></p>
-					<?php
-					foreach ( $attributes as $attribute_name => $options ) {
+						?>
+						<?php the_title( '<h1 class="product-detail-title">', '</h1>' );?>
+						<p class="product-detail-price"><?php echo $product->get_price_html(); ?></p>
+						<?php
+						foreach ( $attributes as $attribute_name => $options ) {
+							?>
+							<div class="product-detail-variant-wrap">
+								<div class="product-detail-variant-title"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></div>
+								<div class="product-detail-variant-select">
+									<?php
+									wc_dropdown_variation_attribute_options(
+										array(
+											'options'   => $options,
+											'attribute' => $attribute_name,
+											'product'   => $product,
+										)
+									);
+									?>
+								</div>
+							</div>
+							<?php
+						}
 						?>
 						<div class="product-detail-variant-wrap">
-							<div class="product-detail-variant-title"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></div>
+							<div class="product-detail-variant-title">Quantity</div>
 							<div class="product-detail-variant-select">
-								<?php
-								wc_dropdown_variation_attribute_options(
-									array(
-										'options'   => $options,
-										'attribute' => $attribute_name,
-										'product'   => $product,
-									)
-								);
-								?>
+								<input type="number" id="quantity" value="1">
+							</div>
+						</div>
+						<button class="product-detail-btn-add-cart" id="btn_add_cart">Add to bag</button>
+						<div class="product-detail-payment">
+							<div class="product-detail-payment-row">
+								<div class="product-detail-payment-img-wrap">
+									<img class="product-detail-payment-img" src="<?php echo get_template_directory_uri()?>/assets/images/icon-clearpay.svg">
+								</div>
+								<p class="product-detail-payment-desc">Make 4 interest-free payments from £15.00 bi-weekly. More info</p>
+							</div>
+							<div class="product-detail-payment-row">
+								<div class="product-detail-payment-img-wrap">
+									<img class="product-detail-payment-img" src="<?php echo get_template_directory_uri()?>/assets/images/icon-klarna.svg">
+								</div>
+								<p class="product-detail-payment-desc">Make 3 payments of £20.00. Klarna. No fees. Learn more</p>
 							</div>
 						</div>
 						<?php
-					}
-					?>
-					<div class="product-detail-variant-wrap">
-						<div class="product-detail-variant-title">Quantity</div>
-						<div class="product-detail-variant-select">
-							<input type="text" id="quantity" value="1">
-						</div>
-					</div>
-					<button class="product-detail-btn-add-cart" id="btn_add_cart">Add to bag</button>
-					<div class="product-detail-payment">
-						<div class="product-detail-payment-row">
-							<img class="product-detail-payment-img" src="<?php echo get_template_directory_uri()?>/assets/images/icon-clearpay.png">
-							<p class="product-detail-payment-desc">Make 4 interest-free payments from £15.00 bi-weekly. More info</p>
-						</div>
-					</div>
-					<?php
-					$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
-					if ( ! empty( $product_tabs ) ) :
-					?>
-						<div class="product-detail-others">
-							<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
-								<div class="product-detail-accordion">
-									<div class="product-detail-accordion-head">
-										<span class="product-detail-accordion-title"><?php echo wp_kses_post( apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) ); ?></span>
-										<span class="product-detail-accordion-icon">
-											<img class="product-detail-accordion-icon_img" minus src="<?php echo get_template_directory_uri()?>/assets/images/icon-minus.png">
-											<img class="product-detail-accordion-icon_img" plus src="<?php echo get_template_directory_uri()?>/assets/images/icon-plus.png">
-										</span>
+						$product_tabs = apply_filters( 'woocommerce_product_tabs', array() );
+						if ( ! empty( $product_tabs ) ) :
+						?>
+							<div class="product-detail-others">
+								<?php foreach ( $product_tabs as $key => $product_tab ) : ?>
+									<div class="product-detail-accordion">
+										<div class="product-detail-accordion-head">
+											<span class="product-detail-accordion-title"><?php echo wp_kses_post( apply_filters( 'woocommerce_product_' . $key . '_tab_title', $product_tab['title'], $key ) ); ?></span>
+											<span class="product-detail-accordion-icon">
+												<img class="product-detail-accordion-icon_img" minus src="<?php echo get_template_directory_uri()?>/assets/images/icon-minus.png">
+												<img class="product-detail-accordion-icon_img" plus src="<?php echo get_template_directory_uri()?>/assets/images/icon-plus.png">
+											</span>
+										</div>
+										<div class="product-detail-accordion-body" style="display:none">
+											<?php
+											if ( isset( $product_tab['callback'] ) ) {
+												call_user_func( $product_tab['callback'], $key, $product_tab );
+											}
+											?>
+										</div>
 									</div>
-									<div class="product-detail-accordion-body" style="display:none">
-										<?php
-										if ( isset( $product_tab['callback'] ) ) {
-											call_user_func( $product_tab['callback'], $key, $product_tab );
-										}
-										?>
-									</div>
-								</div>
-							<?php endforeach; ?>
-						</div>
-					<?php endif; ?>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
+					</div>
 				</div>
 
 				<?php

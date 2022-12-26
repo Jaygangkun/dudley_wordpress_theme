@@ -175,7 +175,7 @@ h1 {
     font-family: 'Brandon Grotesque';
     font-style: normal;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 13px;
     line-height: 21px;
     color: #ffffff;
 }
@@ -377,6 +377,10 @@ h1 {
     margin-top: -20px;
 }
 
+.newsletter-title.mobile-v {
+    display: none;
+}
+
 .section-signature-products {
     padding-top: 90px;
     padding-bottom: 85px;
@@ -513,6 +517,10 @@ h1 {
     transform: translate(-50%, -50%);
 }
 
+.section-feature-title.mobile-v {
+    display: none;
+}
+
 .section-feature-list {
     display: flex;
     align-items: flex-start;
@@ -525,11 +533,11 @@ h1 {
 }
 
 .section-feature-col-title {
-    font-family: 'Playfair Display';
+    font-family: 'Brandon Grotesque';
     font-style: normal;
     font-weight: bold;
-    font-size: 25px;
-    line-height: 31px;
+    font-size: 15px;
+    line-height: 22px;
 
     color: #000000;
     margin-bottom: 6px;
@@ -643,6 +651,10 @@ h1 {
     margin-bottom: 15px;
 }
 
+.footer-newsletter .mobile-v {
+    display: none;
+}
+
 .footer-menu-group {
     max-width: 220px;
     margin-right: 100px;
@@ -660,7 +672,7 @@ h1 {
     justify-content: space-between;
 }
 
-.footer-copyright {
+.footer-copyright, .footer-payments {
     font-family: 'Brandon Grotesque';
     font-style: normal;
     font-weight: 400;
@@ -671,6 +683,12 @@ h1 {
     margin-bottom: 0px;
 }
 
+.footer-payments {
+    padding-left: 30px;
+    text-align: center;
+    padding-left: 0px;
+}
+
 .section-instagrams {
     padding-top: 50px;
     padding-bottom: 116px;
@@ -678,6 +696,18 @@ h1 {
 
 .section-instagram-title {
     text-align: center;
+    font-size: 40px;
+    line-height: 53px;
+}
+
+.section-instagram-title.mobile-v {
+    display: none;
+}
+
+.section-instagram-title .text-highlight::before {
+    width: 100%;
+    height: 24px;
+    bottom: -5px;
 }
 
 .section-instagram-img-list {
@@ -835,10 +865,14 @@ h1 {
     /* flex-shrink: 0; */
 }
 
+.product-details-right-wrap {
+    max-width: 424px;
+}
+
 .product-detail-title {
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 30px;
     line-height: 110%;
     /* or 33px */
@@ -868,7 +902,7 @@ h1 {
     border-radius: 5px;
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 20px;
     line-height: 29px;
     /* identical to box height */
@@ -889,7 +923,12 @@ h1 {
 
 .product-detail-payment-row {
     display: flex;
-    justify-content: space-between; 
+    margin-bottom: 15px;
+    align-items: flex-start;
+}
+
+.product-detail-payment-img-wrap {
+    min-width: 100px;
 }
 
 .product-detail-payment-desc {
@@ -900,6 +939,7 @@ h1 {
     font-size: 14px;
     line-height: 20px;
     text-transform: capitalize;
+    margin-bottom: 0px;
 }
 
 .product-detail-others {
@@ -1162,6 +1202,10 @@ h1 {
     margin-bottom: 21px;
 }
 
+.section-magazines-title .text-highlight::before {
+    width: 100%;
+}
+
 .section-magazines-btn-wrap {
     text-align: center;
     margin-bottom: 86px;
@@ -1346,7 +1390,7 @@ h1 {
 .directory-list-col-title {
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 15px;
     line-height: 21px;
 
@@ -1368,7 +1412,7 @@ h1 {
 .directory-list-col-price {
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 15px;
     line-height: 21px;
 
@@ -1739,6 +1783,75 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     background: white;
 }
 
+/* Customize the label (the container) */
+.account-form-checkbox-style-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.account-form-checkbox-style-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.account-form-checkbox-style-container .checkmark {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    /* background-color: #eee; */
+    border: 1px solid #000000;
+}
+
+/* On mouse-over, add a grey background color */
+.account-form-checkbox-style-container:hover input ~ .checkmark {
+    /* background-color: #ccc; */
+}
+
+/* When the checkbox is checked, add a blue background */
+.account-form-checkbox-style-container input:checked ~ .checkmark {
+    /* background-color: #2196F3; */
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.account-form-checkbox-style-container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.account-form-checkbox-style-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.account-form-checkbox-style-container .checkmark:after {
+    left: 4px;
+    top: 1px;
+    width: 2px;
+    height: 7px;
+    border: solid #000000;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
 .section-legal {
     padding-top: 95px;
     padding-bottom: 60px;
@@ -1779,7 +1892,8 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     z-index: -1;
 }
 
-.product-detail-variant-select select {
+.product-detail-variant-select select,
+.product-detail-variant-select input {
     width: 100%;
     font-family: 'Brandon Grotesque';
     font-style: normal;
@@ -1790,6 +1904,13 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     color: #000000;
     background: transparent;
     text-transform: uppercase;
+    border: 1px solid #767676;
+    box-shadow: initial;
+}
+
+.product-detail-variant-select select:focus,
+.product-detail-variant-select input:focus {
+    background: transparent;
 }
 
 .entry-header .entry-title {
@@ -1996,6 +2117,7 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
 
 .product-detail-variant-wrap {
     margin-bottom: 15px;
+    max-width: 200px;
 }
 
 .form-warnning-message,
@@ -2021,6 +2143,10 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
 .newsletter-success {
     margin-bottom: 10px;
     text-align: center;
+}
+
+.slick-slide {
+    outline: none;
 }
 
 @media screen and (max-width: 1470px) {
@@ -2478,6 +2604,12 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
 
     .footer-bottom {
         padding-top: 0px;
+        justify-content: center;
+    }
+
+    .footer-payments {
+        padding-left: 0px;
+        text-align: center;
     }
 
     .footer-top {
@@ -2499,6 +2631,99 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
 
     .section-product-detail {
         margin-bottom: 60px;
+    }
+
+    .newsletter-title.mobile-v {
+        display: block;
+    }
+
+    .newsletter-title.desktop-v {
+        display: none;
+    }
+
+    .signature-products-title .text-highlight::before {
+        width: 100%;
+        height: 14px;
+    }
+
+    .section-signature-products-list .product-list-col-desc {
+        display: none;
+    }
+
+    .product-list-detail-variants-row {
+        display: block;
+    }
+
+    .product-list-detail-variant-col {
+        width: 100%;
+    }
+
+    .product-detail-variant-wrap {
+        max-width: initial;
+    }
+
+    .section-feature-title.mobile-v {
+        display: block;
+    }
+
+    .section-feature-title.desktop-v {
+        display: none;
+    }
+
+    .section-feature-title {
+        left: 22px;
+        top: 30px;
+        font-size: 50px;
+        line-height: 67px;
+        transform: initial;
+    }
+
+    .section-feature-img {
+        max-height: initial;
+        height: 900px;
+    }
+
+    .section-instagram-title.mobile-v {
+        display: block;
+    }
+
+    .section-instagram-title.desktop-v {
+        display: none;
+    }
+
+    .section-instagram-title {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .section-instagram-img-link {
+        width: calc(50% - 9px)
+    }
+
+    .section-instagram-title .text-highlight::before {
+        height: 15px;
+        bottom: 0px;
+    }
+
+    .trustpilot-img {
+        height: 62px;
+    }
+
+    .section-instagrams {
+        padding-bottom: 30px;
+    }
+
+    .footer-newsletter .mobile-v {
+        display: block;
+    }
+
+    .footer-newsletter .desktop-v {
+        display: none;
+    }
+
+    .footer-newsletter .newsletter-input-desc {
+        text-align: left;
+        margin-bottom: 24px;
     }
 }
 /* 568px */
@@ -2546,6 +2771,14 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     .section-dogcast-list-col {
         width: 100%;
     }
+
+    .text-highlight::before {
+        height: 14px;
+    }
+
+    .magazine-filter-btn {
+        width: 100%;
+    }
 }
 /* 480px */
 
@@ -2559,7 +2792,7 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     }
 
     .section-feature-img {
-        height: 500px;
+        height: 600px;
     }
     
     h1 {

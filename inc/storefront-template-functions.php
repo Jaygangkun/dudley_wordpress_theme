@@ -529,7 +529,7 @@ if ( ! function_exists( 'storefront_edit_post_link' ) ) {
 				),
 				get_the_title()
 			),
-			'<div class="edit-link">',
+			'<div class="edit-link" style="display:none">',
 			'</div>'
 		);
 	}

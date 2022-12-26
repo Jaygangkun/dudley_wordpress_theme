@@ -14,12 +14,19 @@
 	<div class="container-md">
 		<div class="section-dogcast-hero-wrap">
 			<div class="section-dogcast-hero-wrap-left">
-				<h1 class="section-dogcast-hero_title fs-50">Dogcast</h1>
-				<p class="section-dogcast-hero_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel</p>
+				<h1 class="section-dogcast-hero_title fs-50"><?php the_field('title')?></h1>
+				<p class="section-dogcast-hero_desc"><?php the_field('description')?></p>
 			</div>
 			<div class="section-dogcast-hero-wrap-right">
 				<div class="section-dogcast-hero-img-wrap">
-					<img class="" src="<?php echo get_template_directory_uri()?>/assets/images/dogcast-hero.png">
+					<?php
+					$img = get_field('hero_image');
+					if(!empty($img)) {
+						?>
+						<img class="" src="<?php echo $img['url']?>">
+						<?php
+					}
+					?>
 				</div>
 			</div>
 		</div>
@@ -28,30 +35,23 @@
 <section class="section-dogcast-list">
 	<div class="container-lg">
 		<div class="section-dogcast-list-wrap">
-			<div class="section-dogcast-list-col">
-				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast1.jpg)">
-					<h5 class="section-dogcast-list-col_vtitle">The Dudley Dog Cast Amanda Zuydervelt</h5>
+			<?php if( have_rows('list') ): while ( have_rows('list') ) : the_row(); ?>
+				<div class="section-dogcast-list-col">
+					<?php
+					$img = get_sub_field('image');
+					$img_src = '';
+					if(!empty($img)) {
+						$img_src = $img['url'];
+					}
+					?>
+					<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo $img_src;?>)">
+						<h5 class="section-dogcast-list-col_vtitle"><?php the_sub_field('image_title')?></h5>
+					</div>
+					<h6 class="section-dogcast-list-col_title"><?php the_sub_field('title')?></h6>
+					<p class="section-dogcast-list-col_desc"><?php the_sub_field('description')?></p>
+					<p class="section-dogcast-list-col_date"><?php the_sub_field('date')?></p>
 				</div>
-				<h6 class="section-dogcast-list-col_title">The Dudley Dog Cast: Amanda Zuydervelt</h6>
-				<p class="section-dogcast-list-col_desc">Dudley & Co Founder Amanda Zuydervelt talks to Elliot Wilson about the origins of how Dudley came to have his own brand.</p>
-				<p class="section-dogcast-list-col_date">March 2022</p>
-			</div>
-			<div class="section-dogcast-list-col">
-				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast2.jpg)">
-					<h5 class="section-dogcast-list-col_vtitle">The Dudley Dog Cast Ashleigh Flemming</h5>
-				</div>
-				<h6 class="section-dogcast-list-col_title">The Dudley Dog Cast: Ashleigh Flemming</h6>
-				<p class="section-dogcast-list-col_desc">When Ashleigh wanted a black dog she never imagined the one she brought home would be a silver brown mix by the time he had a bath</p>
-				<p class="section-dogcast-list-col_date">March 2022</p>
-			</div>
-			<div class="section-dogcast-list-col">
-				<div class="section-dogcast-list-col-img-wrap" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/dogcast3.png)">
-					<h5 class="section-dogcast-list-col_vtitle">The Dudley Dog Cast Rosemary Ferguson</h5>
-				</div>
-				<h6 class="section-dogcast-list-col_title">The Dudley Dog Cast: Rosemary Ferguson</h6>
-				<p class="section-dogcast-list-col_desc">The first time Dudley met Rosemary Ferguson it was in a smart London Soho members club with a very strict no dogs policy. </p>
-				<p class="section-dogcast-list-col_date">March 2022</p>
-			</div>
+			<?php endwhile; endif; ?>
 		</div>
 	</div>
 </section>

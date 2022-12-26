@@ -77,7 +77,8 @@
 	<div class="container-lg">
 		<div class="section-newsletter-wrap">
 			<div class="section-newsletter-wrap-left">
-				<h1 class="newsletter-title"><span class="text-highlight text-highlight-white">Sign Up</span> For Dudley & Co News</h1>
+				<h1 class="newsletter-title desktop-v"><span class="text-highlight text-highlight-white">Sign Up</span> For Dudley & Co News</h1>
+				<h1 class="newsletter-title mobile-v"><span class="text-highlight text-highlight-white">Sign Up</span> For <br>Dudley & Co News</h1>
 			</div>
 			<div class="section-newsletter-wrap-right newsletter-form">
 				<div class="newsletter-success" style="display:none"></div>
@@ -168,6 +169,7 @@
 													'show_option_none'=> 'Choose '.wc_attribute_label( $attribute_name )
 												)
 											);
+											// echo $attribute_name." <==>";
 											?>
 										</div>
 									</div>
@@ -190,7 +192,8 @@
 <section class="section-feature">
 	<div class="section-feature-top">
 		<img class="section-feature-img" src="<?php echo get_template_directory_uri()?>/assets/images/img-feature.png">
-		<h1 class="section-feature-title">Luxury, Quality, Durability</h1>
+		<h1 class="section-feature-title desktop-v">Luxury, Quality, Durability</h1>
+		<h1 class="section-feature-title mobile-v">Luxury, <br>Quality, <br>Durability</h1>
 	</div>
 	<div class="container-lg">
 		<div class="section-feature-list">
@@ -207,7 +210,7 @@
 				<p class="section-feature-desc">We use double stitching on all our products to ensure our seams will be strong enough for playful and active dogs.</p>
 			</div>
 			<div class="section-feature-col">
-				<h6 class="section-feature-col-title">✓ Superior Quality towelling</h6>
+				<h6 class="section-feature-col-title">✓ Superior Quality Towelling</h6>
 				<p class="section-feature-desc">Made from organic bamboo, our towelling is soft & luxurious,reminiscent of hotel bathrobes.</p>
 			</div>
 		</div>
@@ -222,8 +225,8 @@
 				</div>
 			</div>
 			<div class="section-testimonial-wrap-right">
-				<h1 class="">“Absolutely LOVE! My dog loves its jacket and never wants to take it off ”</h1>
-				<p class="section-testimonial-name">Katie Ling, Tatler</p>
+				<h1 class="">“Absolutely LOVE! <br>My dog loves its jacket and never wants to take it off ”</h1>
+				<p class="section-testimonial-name">Zara, Pointer Owner</p>
 			</div>
 		</div>
 	</div>

@@ -61,14 +61,14 @@
 			));
 			
 			foreach($products as $product) {
+				
 				$product_obj = wc_get_product($product->ID);
-
+				
 				$get_variations = count( $product_obj->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product_obj );
-				$available_variations = $get_variations ? $product_obj->get_available_variations() : false;
+				$available_variations = $get_variations ? $product_obj->get_available_variations() : false; // has error if simple product
 				$attributes = $product_obj->get_variation_attributes();
 				ksort($attributes);
 				$selected_attributes = $product_obj->get_default_attributes();
-
 
 				// single-product/add-to-cart/variable.php
 				$attribute_keys  = array_keys( $attributes );
