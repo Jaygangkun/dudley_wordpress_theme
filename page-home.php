@@ -105,14 +105,17 @@
 			<?php
 			$products = get_posts(array(
 				'post_type'             => 'product',
-				'orderby' => 'rand',
+				'meta_key' => 'rwpp_sortorder_73',
+				'orderby' => 'meta_value_num',
+				'order' => 'ASC',
+				// 'orderby' => 'ID',
 				'numberposts' => 4,
 				'tax_query'             => array(
 					// 'relation' => 'OR',
 					array(
 						'taxonomy'      => 'product_cat',
 						'field'         => 'slug',
-						'terms'         => array('dog_clothing', 'dog_accessories'),
+						'terms'         => array('dogs'),
 						'operator'      => 'IN'
 					),
 					// array(
@@ -191,7 +194,14 @@
 </section>
 <section class="section-feature">
 	<div class="section-feature-top">
-		<img class="section-feature-img" src="<?php echo get_template_directory_uri()?>/assets/images/img-feature.png">
+		<?php
+		$img = get_field('feature_main_image');
+		if(!empty($img)) {
+			?>
+			<img class="section-feature-img" src="<?php echo $img['url']?>">
+			<?php
+		}
+		?>
 		<h1 class="section-feature-title desktop-v">Luxury, Quality, Durability</h1>
 		<h1 class="section-feature-title mobile-v">Luxury, <br>Quality, <br>Durability</h1>
 	</div>

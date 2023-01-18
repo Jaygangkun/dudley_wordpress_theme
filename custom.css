@@ -297,6 +297,7 @@ h1 {
     left: 0px;
     bottom: 0px;
     width: calc(100% - 30px);
+    width: 100%;
     height: 20px;
     background: #C2B5C7;
     z-index: -1;
@@ -462,12 +463,12 @@ h1 {
     font-family: 'Brandon Grotesque';
     font-style: normal;
     font-weight: bold;
-    font-size: 15px;
-    line-height: 21px;
+    font-size: 18px;
+    line-height: 30px;
 
     color: #000000;
     margin-bottom: 12px;
-    height: 21px;
+    height: 30px;
     overflow: hidden;
 }
 
@@ -902,9 +903,9 @@ h1 {
     border-radius: 5px;
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 29px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
     /* identical to box height */
 
     text-transform: uppercase;
@@ -913,7 +914,7 @@ h1 {
     padding: 13px;
     text-align: center;
     width: 100%;
-    margin-top: 40px;
+    margin-top: 10px;
     border: 0px !important;
 }
 
@@ -976,7 +977,7 @@ h1 {
     font-weight: 400;
     font-size: 15px;
     line-height: 21px;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
 
     color: #000000;
 }
@@ -1305,8 +1306,6 @@ h1 {
     font-size: 20px;
     line-height: 29px;
     text-align: center;
-    text-transform: capitalize;
-
     color: #000000;
     margin-bottom: 83px;
 }
@@ -1391,8 +1390,8 @@ h1 {
     font-family: 'Brandon Grotesque';
     font-style: normal;
     font-weight: bold;
-    font-size: 15px;
-    line-height: 21px;
+    font-size: 18px;
+    line-height: 30px;
 
     color: #000000;
     margin-bottom: 0px;
@@ -1435,7 +1434,7 @@ h1 {
     font-weight: 400;
     font-size: 20px;
     line-height: 29px;
-    text-transform: capitalize;
+    color: #000000;
 }
 
 .section-dogcast-hero-wrap {
@@ -1726,7 +1725,7 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     user-select: none;
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 390;
+    font-weight: 400;
     font-size: 15px;
     line-height: 21px;
 }
@@ -1897,15 +1896,33 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     width: 100%;
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 390;
+    font-weight: 400;
     font-size: 12px;
     line-height: 17px;
     padding: 5px 10px;
     color: #000000;
-    background: transparent;
+    background-color: transparent;
     text-transform: uppercase;
     border: 1px solid #767676;
     box-shadow: initial;
+}
+
+.product-detail-variant-container .product-detail-variant-select select,
+.product-detail-variant-container .product-detail-variant-select input {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 21px;
+    padding: 10px 15px;
+    border-radius: 6px;
+}
+
+
+select {
+    appearance:none;
+    background-image:url('assets/images/arrow_drop_down.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-position-x: calc(100% - 10px);
 }
 
 .product-detail-variant-select select:focus,
@@ -1991,7 +2008,7 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
 .section-size-guide-middle-wrap--right ul li {
     font-family: 'Brandon Grotesque';
     font-style: normal;
-    font-weight: 390;
+    font-weight: 400;
     font-size: 15px;
     line-height: 21px;
 
@@ -2120,6 +2137,11 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
     max-width: 200px;
 }
 
+.product-detail-variant-container .product-detail-variant-wrap {
+    max-width: initial;
+    width: calc(50% - 10px);
+}
+
 .form-warnning-message,
 .newsletter-error {
     color: #ff0000;
@@ -2147,6 +2169,153 @@ a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[typ
 
 .slick-slide {
     outline: none;
+}
+
+table:not( .has-background ) th {
+    background-color: #5e4269;
+    color: white;
+}
+
+.woocommerce-cart-form__cart-item.cart_item td {
+    background-color: transparent !important;
+}
+
+.shop_table td {
+    background-color: transparent !important;
+}
+
+.page-full-width * {
+    font-family: 'Brandon Grotesque';
+}
+
+table.cart td.product-remove, table.cart td.actions {
+    border-top-color: transparent;
+}
+
+.woocommerce-cart-form__cart-item.cart_item .product-name a {
+    font-size: 15px;
+    line-height: 21px;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+table.cart td.product-quantity .qty {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    padding: 5px 10px;
+    color: #000000;
+    background: transparent;
+    text-transform: uppercase;
+    border: 1px solid #767676;
+}
+
+#coupon_code {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    padding: 16px 10px;
+    color: #000000;
+    background: transparent;
+    text-transform: uppercase;
+    border: 1px solid #767676;
+    margin-right: 10px;
+}
+
+table.cart td.actions .coupon {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout-button {
+    width: 100%;
+    text-decoration: none !important;
+}
+
+.woocommerce-info, .woocommerce-noreviews, p.no-comments {
+    background-color: #5e4269;
+}
+
+.woocommerce-input-wrapper .input-text {
+    width: 100%;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    padding: 5px 10px;
+    color: #000000;
+    background: transparent;
+    text-transform: uppercase;
+    border: 1px solid #767676;
+    box-shadow: initial;
+}
+
+.select2-container--default .select2-selection--single {
+    width: 100%;
+    font-family: 'Brandon Grotesque';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 17px;
+    color: #000000;
+    background: transparent;
+    text-transform: uppercase;
+    border: 1px solid #767676;
+    box-shadow: initial;
+    border-radius: 0px;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected], .select2-container--default .select2-results__option--highlighted[data-selected] {
+    background-color: #5e4269;
+}
+
+.select2-results__option {
+    font-size: 12px;
+    line-height: 17px;
+}
+
+#order_review {
+    background: transparent;
+}
+
+#payment .payment_methods > li .payment_box, #payment .place-order {
+    background-color: transparent;
+}
+
+#payment .payment_methods > li:not(.woocommerce-notice) {
+    background-color: transparent;
+}
+
+table:not( .has-background ) tbody tr:nth-child(2n) td, fieldset, fieldset legend {
+    background-color: transparent;
+}
+
+html {
+    margin-top: 0px !important;
+}
+
+#wpadminbar {
+    display: none;
+}
+
+#sticker {
+    z-index: 10 !important;
+}
+
+.header {
+    background: #fffcf3;
+}
+
+.is-sticky .header {
+    box-shadow: 1px 1px 1px #dfdada; 
+}
+
+.product-detail-variant-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 @media screen and (max-width: 1470px) {

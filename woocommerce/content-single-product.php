@@ -116,32 +116,35 @@ $product_id = $product->get_id();
 						?>
 						<?php the_title( '<h1 class="product-detail-title">', '</h1>' );?>
 						<p class="product-detail-price"><?php echo $product->get_price_html(); ?></p>
-						<?php
-						foreach ( $attributes as $attribute_name => $options ) {
+						<div class="product-detail-variant-container">
+							<?php
+							foreach ( $attributes as $attribute_name => $options ) {
+								?>
+								<div class="product-detail-variant-wrap">
+									<div class="product-detail-variant-title" style="display: none"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></div>
+									<div class="product-detail-variant-select">
+										<?php
+										wc_dropdown_variation_attribute_options(
+											array(
+												'options'   => $options,
+												'attribute' => $attribute_name,
+												'product'   => $product,
+											)
+										);
+										?>
+									</div>
+								</div>
+								<?php
+							}
 							?>
-							<div class="product-detail-variant-wrap">
-								<div class="product-detail-variant-title"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></div>
+							<div class="product-detail-variant-wrap" style="display: none">
+								<div class="product-detail-variant-title">Quantity</div>
 								<div class="product-detail-variant-select">
-									<?php
-									wc_dropdown_variation_attribute_options(
-										array(
-											'options'   => $options,
-											'attribute' => $attribute_name,
-											'product'   => $product,
-										)
-									);
-									?>
+									<input type="number" id="quantity" value="1">
 								</div>
 							</div>
-							<?php
-						}
-						?>
-						<div class="product-detail-variant-wrap">
-							<div class="product-detail-variant-title">Quantity</div>
-							<div class="product-detail-variant-select">
-								<input type="number" id="quantity" value="1">
-							</div>
 						</div>
+						
 						<button class="product-detail-btn-add-cart" id="btn_add_cart">Add to bag</button>
 						<div class="product-detail-payment">
 							<div class="product-detail-payment-row">

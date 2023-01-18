@@ -9,7 +9,15 @@
 
 ?>
 <?php get_header() ?>
-<div class="section-img-hero" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/magazine-hero.png)">
+<?php
+$img = get_field('hero_image');
+if(!empty($img)) {
+	?>
+	<div class="section-img-hero" style="background-image:url(<?php echo $img['url']?>)">
+	<?php
+}
+?>
+
 </div>
 <section class="section-magazines">
 	<div class="container-md">

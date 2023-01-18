@@ -86,24 +86,40 @@ add_action("wp_ajax_nopriv_load_more_magazines", "load_more_magazines");
 
 function load_home_products() {
 
-	$terms = array('dog_clothing', 'dog_accessories');
 
 	if(isset($_POST['cat']) && $_POST['cat'] == 'human') {
-		$terms = array('doglovers_clothing');
+        $products = get_posts(array(
+            'post_type'             => 'product',
+            // 'orderby' => 'rand',
+            'numberposts' => 4,
+            'tax_query'             => array(
+                array(
+                    'taxonomy'      => 'product_cat',
+                    'field'         => 'slug',
+                    'terms'         => array('humans'),
+                    'operator'      => 'IN'
+                ),
+            )
+        ));
 	}
-	$products = get_posts(array(
-		'post_type'             => 'product',
-		'orderby' => 'rand',
-		'numberposts' => 4,
-		'tax_query'             => array(
-			array(
-				'taxonomy'      => 'product_cat',
-				'field'         => 'slug',
-				'terms'         => $terms,
-				'operator'      => 'IN'
-			),
-		)
-	));
+    else {
+        $products = get_posts(array(
+            'post_type'             => 'product',
+            'meta_key' => 'rwpp_sortorder_73',
+            'orderby' => 'meta_value_num',
+            'order' => 'ASC',
+            'numberposts' => 4,
+            'tax_query'             => array(
+                array(
+                    'taxonomy'      => 'product_cat',
+                    'field'         => 'slug',
+                    'terms'         => array('dogs'),
+                    'operator'      => 'IN'
+                ),
+            )
+        ));
+    }
+	
 	ob_start();
 	foreach($products as $product) {
 		$product_obj = wc_get_product($product->ID);
@@ -609,9 +625,9 @@ add_filter( 'woocommerce_dropdown_variation_attribute_options_args', 'dudley_fil
 
 function dudley_filter_dropdown_args( $args ) {
     $var_tax = get_taxonomy( $args['attribute'] );
-    $args['show_option_none'] = 'Choose '.$var_tax->labels->name;
+    $args['show_option_none'] = 'SELECT '.$var_tax->labels->name;
     global $product;
-    $args['show_option_none'] = 'Choose a '.strtolower(wc_attribute_label($args['attribute'],$product));
+    $args['show_option_none'] = 'SELECT '.strtolower(wc_attribute_label($args['attribute'],$product));
     return $args;
 }
 

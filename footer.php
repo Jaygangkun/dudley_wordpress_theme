@@ -65,6 +65,7 @@
 	<div class="loading-screen-icon"></div>
 </div>
 <?php wp_footer(); ?>
+<script src="<?php echo get_template_directory_uri()?>/assets/js/jquery.sticky.js"></script>
 <script>
 	function validateEmail(email) 
 	{
@@ -198,6 +199,10 @@
 			}
 		})
 	})
+
+	jQuery(document).ready(function(){
+		jQuery("#sticker").sticky({topSpacing:0});
+	});
 </script>
 </body>
 </html>

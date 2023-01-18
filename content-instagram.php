@@ -17,7 +17,7 @@
             </a>
 		</div>
 		<div class="trustpilot-img-wrap">
-			<img class="trustpilot-img" src="<?php echo get_template_directory_uri()?>/assets/images/trustpilot.svg">
+			<a href="https://uk.hugoandhudson.com/collections/dog-collars?gclid=Cj0KCQiAzeSdBhC4ARIsACj36uHuMwqdAJ_aQKTrtYnXwJ2eRQmg7oxHKXfRLP5vpmUbMXeIdv-J_04aAjMdEALw_wcB" target="_blank"><img class="trustpilot-img" src="<?php echo get_template_directory_uri()?>/assets/images/trustpilot.svg"></a>
 		</div>
 	</div>
 </section>
