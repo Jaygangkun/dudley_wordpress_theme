@@ -63,7 +63,6 @@
 			foreach($products as $product) {
 				
 				$product_obj = wc_get_product($product->ID);
-				
 				$get_variations = count( $product_obj->get_children() ) <= apply_filters( 'woocommerce_ajax_variation_threshold', 30, $product_obj );
 				$available_variations = $get_variations ? $product_obj->get_available_variations() : false; // has error if simple product
 				$attributes = $product_obj->get_variation_attributes();
@@ -74,7 +73,6 @@
 				$attribute_keys  = array_keys( $attributes );
 				$variations_json = wp_json_encode( $available_variations );
 				$variations_attr = function_exists( 'wc_esc_json' ) ? wc_esc_json( $variations_json ) : _wp_specialchars( $variations_json, ENT_QUOTES, 'UTF-8', true );
-				
 				?>
 				<div class="product-list-col" data-product-variants="<?php echo $variations_attr;?>" data-product-initial-price="<?php echo function_exists( 'wc_esc_json' ) ? wc_esc_json( $product_obj->get_price_html() ) : _wp_specialchars( $product_obj->get_price_html(), ENT_QUOTES, 'UTF-8', true )?>">
 					<div class="product-list-col-wrap">

@@ -193,18 +193,19 @@
 	</div>
 </section>
 <section class="section-feature">
-	<div class="section-feature-top">
-		<?php
-		$img = get_field('feature_main_image');
-		if(!empty($img)) {
-			?>
-			<img class="section-feature-img" src="<?php echo $img['url']?>">
-			<?php
-		}
+	
+	<?php
+	$img = get_field('feature_main_image');
+	if(!empty($img)) {
 		?>
-		<h1 class="section-feature-title desktop-v">Luxury, Quality, Durability</h1>
-		<h1 class="section-feature-title mobile-v">Luxury, <br>Quality, <br>Durability</h1>
-	</div>
+		<div class="section-feature-top">
+			<img class="section-feature-img" src="<?php echo $img['url']?>">
+			<h1 class="section-feature-title desktop-v">Luxury, Quality, Durability</h1>
+			<h1 class="section-feature-title mobile-v">Luxury, <br>Quality, <br>Durability</h1>
+		</div>
+		<?php
+	}
+	?>
 	<div class="container-lg">
 		<div class="section-feature-list">
 			<div class="section-feature-col">
