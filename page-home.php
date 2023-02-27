@@ -44,32 +44,6 @@
 					</div>
 				</div>
 			<?php endwhile; endif; ?>
-			<div class="">
-				<div class="hero-slide-wrap">
-					<div class="hero-slide-wrap-left">
-						<h1 class="hero-slide-text">Dudley & Co is a British label for dogs, and the humans who love them. Our products deliver on the promise of <span class="text-highlight">‘luxury that lasts’.</span></h1>
-						<a class="btn btn-black btn-lg" href="/shop">shop the collection</a>
-					</div>
-					<div class="hero-slide-wrap-right">
-						<div class="hero-slide-img-wrap">
-							<img class="hero-slide-img" src="<?php echo get_template_directory_uri()?>/assets/images/slider-img.png">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="">
-				<div class="hero-slide-wrap">
-					<div class="hero-slide-wrap-left">
-						<h1 class="hero-slide-text">Dudley & Co is a British label for dogs, and the humans who love them. Our products deliver on the promise of <span class="text-highlight">‘luxury that lasts’.</span></h1>
-						<a class="btn btn-black btn-lg" href="/shop">shop the collection</a>
-					</div>
-					<div class="hero-slide-wrap-right">
-						<div class="hero-slide-img-wrap">
-							<img class="hero-slide-img" src="<?php echo get_template_directory_uri()?>/assets/images/slider-img.png">
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 </section>
@@ -229,16 +203,30 @@
 </section>
 <section class="section-testimonials">
 	<div class="container-md">
-		<div class="section-testimonial-wrap">
-			<div class="section-testimonial-wrap-left">
-				<div class="section-testimonial-img-wrap">
-					<img class="section-testimonial-img" src="<?php echo get_template_directory_uri()?>/assets/images/slider-img.png">
+		<div class="testimonials-slider">
+			<?php if( have_rows('testimonials') ): while ( have_rows('testimonials') ) : the_row(); ?>
+				<div>
+					<div class="section-testimonial-wrap">
+						<div class="section-testimonial-wrap-left">
+							<?php
+							$img = get_sub_field('image');
+							if(!empty($img)) {
+								?>
+								<div class="section-testimonial-img-wrap">
+									<div class="section-testimonial-img-div" style="background-image:url(<?php echo $img?>)"></div>
+								</div>
+								<?php
+							}
+							?>
+							
+						</div>
+						<div class="section-testimonial-wrap-right">
+							<h1 class=""><?php the_sub_field('text')?></h1>
+							<p class="section-testimonial-name"><?php the_sub_field('user')?></p>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="section-testimonial-wrap-right">
-				<h1 class="">“Absolutely LOVE! <br>My dog loves its jacket and never wants to take it off ”</h1>
-				<p class="section-testimonial-name">Zara, Pointer Owner</p>
-			</div>
+			<?php endwhile; endif; ?>
 		</div>
 	</div>
 </section>
@@ -248,6 +236,11 @@
 		jQuery('.hero-slider').slick({
 			prevArrow: '<img class="hero-slider-arrow-toleft" src="<?php echo get_template_directory_uri()?>/assets/images/icon-arrow-toleft.png">',
 			nextArrow: '<img class="hero-slider-arrow-toright" src="<?php echo get_template_directory_uri()?>/assets/images/icon-arrow-toright.png">'
+		});
+
+		jQuery('.testimonials-slider').slick({
+			prevArrow: '<img class="testimonials-slider-arrow-toleft" src="<?php echo get_template_directory_uri()?>/assets/images/icon-arrow-toleft.png">',
+			nextArrow: '<img class="testimonials-slider-arrow-toright" src="<?php echo get_template_directory_uri()?>/assets/images/icon-arrow-toright.png">'
 		});
 	})
 

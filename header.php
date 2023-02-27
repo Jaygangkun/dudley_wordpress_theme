@@ -19,6 +19,7 @@
 		var ajax_url = '<?php echo admin_url('admin-ajax.php')?>';
 		var price_symbol = '<?php echo get_woocommerce_currency_symbol();?>';
 	</script>
+	<script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
 </head>
 
 <body <?php body_class(); ?>>

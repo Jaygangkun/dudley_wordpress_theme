@@ -15,7 +15,8 @@
 	</div>
 </section>
 <section class="section-story-content">
-	<img class="w-100 section-story-main-img" src="<?php echo get_template_directory_uri()?>/assets/images/ourstory-img1.png">
+	<img class="w-100 section-story-main-img section-story-main-img--desktop" src="<?php echo get_template_directory_uri()?>/assets/images/ourstory-banner-desktop.png">
+	<img class="w-100 section-story-main-img section-story-main-img--mobile" src="<?php echo get_template_directory_uri()?>/assets/images/ourstory-banner-mobile.png">
 	<div class="container-md">
 		<p class="section-story-text">Raised in a warm climate, Dudley & Co co-founder Amanda didn’t realise dogs needed cold-weather clothing until she moved to London and met Rizzo, a short-haired Vizsla. He was adorable and Amanda – unable to have a pup due to travel commitments - asked friends if she could dog-sit. Like all Vizslas, he was a sensitive soul who hated the cold, and slept in a tight ball during London’s long winters. One chilly day, Amanda walked into a pet store in Notting Hill and bought Rizzo his first coat. Did he love it? Did he ever! He even slept in it, his legs stretched out, languidly and happily. Amanda saw the importance of dog clothing and its role as more than just window-dressing for pooches, and started to look closely at what clothing and accessories were available for dogs. </p>
 		<div class="section-story-content-imgs">
@@ -28,7 +29,7 @@
 		</div>
 		<p class="section-story-text">Fast forward to 2016. Amanda, now living in Switzerland, had adopted Dudley, a gorgeous Vizsla puppy. To prepare him for the nippy winters, Amanda bought an indoor jumper, an outdoor coat and little rubber booties to wear on the ski slopes. Before long, Dudley had amassed quite a wardrobe. But too much of the apparel was flawed. Clothing wasn’t durable enough. Zips broke, fabric stretched or tore, and buttons and clasps came off. Stronger pieces were often made with cheap cloth, while ‘luxury’ fabrics were often poorly fitted and finished. Amanda spotted a gap in the market: a glaring need for practical, stylish and durable clothing for dogs, using high-quality fabrics, custom-made by the best British and European factories.<br><br>
 		Armed with a great idea and with entrepreneurial vim running through her veins, Amanda just needed a partner to bring her vision to life. A chance phone call from long-time friend Lori Heiss-Tiplady changed everything. Lori had years of hard-boiled experience working in branding and product development at some of the world’s largest firms, and was looking for a fresh challenge. Lori was the missing piece of the puzzle, and so it was that Dudley & Co was born.<br><br>
-		Our mission is to create a high end range of durable, reliable and stylish clothing and accessories for dogs. All our products are proudly made in Britain and designed to live up to the promise of. </p>
+		Our mission is to create a high end range of durable, reliable and stylish clothing and accessories for dogs. All our products are proudly made in Britain and designed to live up to the promise of </p>
 	</div>
 </section>
 

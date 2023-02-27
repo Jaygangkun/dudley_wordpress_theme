@@ -11,7 +11,7 @@
 <?php get_header() ?>
 <section class="section-shop-hero" style="background-image:url(<?php echo get_template_directory_uri()?>/assets/images/shop-hero.png)">
 	<div class="container-lg">
-		<h1 class="section-shop-hero-title">shop the edit your dog will thank you</h1>
+		<h1 class="section-shop-hero-title"><i>shop the edit</i> <br>your dog will thank you</h1>
 	</div>
 </section>
 <section class="section-products">

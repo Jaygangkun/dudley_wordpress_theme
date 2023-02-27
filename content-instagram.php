@@ -19,5 +19,10 @@
 		<div class="trustpilot-img-wrap">
 			<a href="https://uk.hugoandhudson.com/collections/dog-collars?gclid=Cj0KCQiAzeSdBhC4ARIsACj36uHuMwqdAJ_aQKTrtYnXwJ2eRQmg7oxHKXfRLP5vpmUbMXeIdv-J_04aAjMdEALw_wcB" target="_blank"><img class="trustpilot-img" src="<?php echo get_template_directory_uri()?>/assets/images/trustpilot.svg"></a>
 		</div>
+		<!-- TrustBox widget - Micro Review Count -->
+		<div class="trustpilot-widget" data-locale="en-GB" data-template-id="5419b6a8b0d04a076446a9ad" data-businessunit-id="63d647337a666c28eaa2c69e" data-style-height="24px" data-style-width="100%" data-theme="light" data-min-review-count="10" data-without-reviews-preferred-string-id="2" data-style-alignment="center">
+			<a href="https://uk.trustpilot.com/review/wearedudleyandco.com" target="_blank" rel="noopener">Trustpilot</a>
+		</div>
+		<!-- End TrustBox widget -->
 	</div>
 </section>
